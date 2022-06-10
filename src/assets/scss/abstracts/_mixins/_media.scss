@@ -1,0 +1,107 @@
+@mixin min1026 {
+    @media (min-width: 1026px) {
+        @content;
+    }
+}
+
+@mixin min767 {
+    @media (min-width: 767px) {
+        @content;
+    }
+}
+
+// @mixin _1400 {
+//     @media (max-width: 1400px) {
+//         @content;
+//     }
+// }
+
+// @mixin _1200 {
+//     @media (max-width: 1200px) {
+//         @content;
+//     }
+// }
+
+// @mixin _1000 {
+//     @media (max-width: 1000px) {
+//         @content;
+//     }
+// }
+
+// @mixin _767 {
+//     @media (max-width: 767px) {
+//         @content;
+//     }
+// }
+
+// @mixin _700 {
+//     @media (max-width: 700px) {
+//         @content;
+//     }
+// }
+
+// @mixin _600 {
+//     @media (max-width: 600px) {
+//         @content;
+//     }
+// }
+
+// @mixin _500 {
+//     @media (max-width: 500px) {
+//         @content;
+//     }
+// }
+
+// @mixin _400 {
+//     @media (max-width: 400px) {
+//         @content;
+//     }
+// }
+
+// @mixin _350 {
+//     @media (max-width: 350px) {
+//         @content;
+//     }
+// }
+
+// @mixin maxWidth($screen) {
+//     @media (max-width: $screen+'px') {
+//         @content;
+//     }
+// }
+
+// @mixin minWidth($width) {
+//     @media (min-width: $width+'px') {
+//         @content;
+//     }
+// }
+
+// @mixin minMaxWidth($minWidth, $maxWidth) {
+//     @media (min-width: $minWidth+'px') and (max-width: $maxWidth+'px') {
+//         @content;
+//     }
+// }
+
+// @mixin maxHeight($height) {
+//     @media (max-height: $height) {
+//         @content;
+//     }
+// }
+
+// @mixin minHeight($height) {
+//     @media (min-height: $height) {
+//         @content;
+//     }
+// }
+
+@mixin retina2x() {
+    @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+        @content;
+    }
+}
+
+@mixin retina3x() {
+    @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+        @content;
+    }
+}

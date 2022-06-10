@@ -1,0 +1,24 @@
+{
+  "name": "crypto-exchange",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 5050",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "pinia": "^2.0.13",
+    "vue": "^3.2.33",
+    "vue-i18n": "^9.1.10",
+    "vue-router": "^4.0.14"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.1",
+    "eslint": "^8.5.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "sass": "^1.52.1",
+    "vite": "^2.9.5",
+    "vite-svg-loader": "^3.3.0"
+  }
+}
