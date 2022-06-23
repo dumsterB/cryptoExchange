@@ -1,0 +1,43 @@
+.link {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: center;
+    height: 60px;
+    color: var(--color-typo-ghost);
+    background-color: var(--color-essential);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    padding: 8px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: color 0.1s ease-in-out;
+
+    @include hover {
+        &:hover {
+            background-color: var(--color-surface);
+        }
+    }
+
+    &.active {
+        color: var(--color-primary);
+    }
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 100%;
+}
+
+.text {
+    padding-top: 2px;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
