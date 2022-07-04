@@ -14,3 +14,10 @@
     opacity: 1;
     text-align: center;
 }
+
+@include max360 {
+    .input {
+        width: 42px;
+        height: 54px;
+    }
+}
