@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onBeforeMount, reactive, ref, shallowRef, watch } from 'vue';
 import EmptyPlaceholder from '@/components/general/empty/EmptyPlaceholder.vue';
+import FlagIcon from '@/components/general/flag/FlagIcon';
 import VInput from '@/components/common/input/VInput.vue';
 import { useI18n } from 'vue-i18n';
 import { useClickOutside } from '@/hooks/helpers/useClickOutside';
@@ -95,10 +96,10 @@ const selectResult = (code, text) => {
             @keydown="openDropdown"
         >
             <template #addon-left>
-                <div
+                <FlagIcon
                     v-if="selectedResult.code"
-                    :class="[styles.flag, styles.inputFlag]"
-                    :style="{ backgroundImage: `url(/images/flags/${ selectedResult.code }.svg)` }"
+                    :code="selectedResult.code"
+                    :class="styles.inputFlag"
                 />
             </template>
         </VInput>
@@ -119,9 +120,9 @@ const selectResult = (code, text) => {
                         :class="styles.country"
                         @click="selectResult(code, text)"
                     >
-                        <div
-                            :class="[styles.flag, styles.countryFlag]"
-                            :style="{ backgroundImage: `url(/images/flags/${ code }.svg)`}"
+                        <FlagIcon
+                            :code="code"
+                            :class="styles.countryFlag"
                         />
 
                         <div :class="styles.countryText">
