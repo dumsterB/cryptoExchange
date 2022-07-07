@@ -1,11 +1,12 @@
 <script setup>
-import { computed, onBeforeMount, reactive, ref, shallowRef, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import EmptyPlaceholder from '@/components/general/empty/EmptyPlaceholder.vue';
 import FlagIcon from '@/components/general/flag/FlagIcon';
 import VInput from '@/components/common/input/VInput.vue';
 import { useI18n } from 'vue-i18n';
+import { useCountries } from '@/hooks/country/useCountries';
+import { useSearch } from '@/hooks/search/useSearch';
 import { useClickOutside } from '@/hooks/helpers/useClickOutside';
-import { filterCountries, getCountries } from '@/services/country';
 
 // TODO: autodetect country
 const props = defineProps({
@@ -24,20 +25,17 @@ const emit = defineEmits({
     'update:modelValue': null
 });
 
-const { t, locale } = useI18n();
-const countries = shallowRef([]);
+const { t } = useI18n();
 
-onBeforeMount(async () => {
-    countries.value = await getCountries(locale.value);
-});
+const { countries } = useCountries();
+const { search, filteredResults } = useSearch(countries, props.max);
 
-const inputValue = ref('');
 const selectedResult = reactive({
     code: '',
     text: ''
 });
 
-watch(inputValue, val => {
+watch(search, val => {
     const { text, code } = selectedResult;
 
     if (code && (!val || text !== val)) {
@@ -67,18 +65,10 @@ watch(isDropdownVisible, visible => {
     }
 });
 
-const filteredCountries = computed(() => {
-    return filterCountries(
-        inputValue.value,
-        countries.value,
-        props.max
-    );
-});
-
 const selectResult = (code, text) => {
     emit('update:modelValue', code);
 
-    inputValue.value = text;
+    search.value = text;
 
     selectedResult.code = code;
     selectedResult.text = text;
@@ -91,7 +81,7 @@ const selectResult = (code, text) => {
     <div :class="styles.wrap">
 
         <VInput
-            v-model="inputValue"
+            v-model="search"
             :label="t('country')"
             @keydown="openDropdown"
         >
@@ -111,11 +101,11 @@ const selectResult = (code, text) => {
                 :class="styles.dropdown"
             >
                 <div
-                    v-if="filteredCountries.length"
+                    v-if="filteredResults.length"
                     :class="styles.list"
                 >
                     <div
-                        v-for="({ code, text }) in filteredCountries"
+                        v-for="({ code, text }) in filteredResults"
                         :key="code"
                         :class="styles.country"
                         @click="selectResult(code, text)"
