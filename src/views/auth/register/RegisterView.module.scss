@@ -1,0 +1,19 @@
+.fields {
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 30px;
+
+    &Input + &Input {
+        margin-top: 16px;
+    }
+}
+
+.button {
+    margin-bottom: 30px;
+}
+
+.checkboxes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}

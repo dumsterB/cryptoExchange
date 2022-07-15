@@ -1,0 +1,173 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    flex-grow: 1;
+}
+
+.promo {
+    position: relative;
+    background-color: var(--color-bg-register);
+    overflow: hidden;
+    transform: translateZ(0);
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        background-position: 50%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        pointer-events: none;
+    }
+
+    &::before {
+        left: -126px;
+        bottom: 0;
+        width: 850px;
+        height: 980px;
+        background-image: url('/images/register-gradient-left.svg');
+    }
+
+    &::after {
+        top: 0;
+        right: 0;
+        width: 174px;
+        height: 485px;
+        background-image: url('/images/register-gradient-right.svg');
+    }
+
+    &Phone {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 433px;
+        height: 740px;
+        background-size: contain;
+        background-image: url('/images/register-phone.png');
+        background-position: left bottom;
+        background-repeat: no-repeat;
+
+        @include retina2x {
+            background-image: url('/images/register-phone@2x.png');
+        }
+    }
+}
+
+.content {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 30px 160px 30px;
+}
+
+.form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.logoSign {
+    display: flex;
+    justify-content: center;
+    color: var(--color-typo-base);
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: var(--text-headline-xl-font-size);
+    font-weight: var(--text-headline-xl-font-weight);
+    line-height: var(--text-headline-xl-line-height);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+.side {
+    position: absolute;
+    left: 50%;
+    bottom: 80px;
+    width: 100%;
+    transform: translate(-50%, 0);
+    padding: 0 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+
+    &Text {
+        color: var(--color-typo-ghost);
+        margin-right: 5px;
+    }
+
+    &Link {
+        color: var(--color-primary);
+        user-select: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        text-decoration: underline;
+    }
+}
+
+@include min1201 {
+    @media (max-height: 900px) {
+        .promo {
+            &Phone {
+                width: 400px;
+                height: 682px;
+            }
+        }
+    }
+}
+
+@include max1200 {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .promo {
+        display: none;
+    }
+
+    .content {
+        padding: 50px 20px 150px 20px;
+    }
+
+    .side {
+        bottom: 60px;
+    }
+}
+
+@include max767 {
+    .logoSign {
+        margin-bottom: 16px;
+
+        svg {
+            height: 30px;
+        }
+    }
+
+    .form {
+        max-width: 100%;
+    }
+}
+
+@include max360 {
+    .content {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .side {
+        display: flex;
+        flex-flow: column;
+        padding: 0 16px;
+
+        &Text {
+            font-size: 14px;
+            margin: 0 0 6px 0;
+        }
+    }
+}
