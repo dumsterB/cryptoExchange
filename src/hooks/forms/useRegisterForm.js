@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 import { useField, useForm } from 'vee-validate';
 import { useToast } from '@/hooks/toast/useToast';
 
-import { handleRegister } from '@/services/auth/register';
+import { handleRegister } from '@/services/auth/register/start';
 import { EMAIL_FIELD, PHONE_FIELD, PASSWORD_FIELD, PASSWORD_CONFIRM_FIELD } from '@/services/auth/fields';
 
 export function useRegisterForm() {

@@ -4,6 +4,17 @@ import { getUserMetadata, loginToAccount } from '@/services/api/repositories/aut
 import AccessToken from './tokens/AccessToken';
 import RefreshToken from './tokens/RefreshToken';
 
+export async function loginWithTokens() {
+    const user = await getUserMetadata();
+    const userStore = useUserStore();
+    
+    if (user) {
+        userStore.set(user);
+    } else {
+        throw new Error('errors.somethingFailed');
+    }
+}
+
 async function login(form) {
     const result = await loginToAccount(form);
 
@@ -16,14 +27,7 @@ async function login(form) {
     AccessToken.set(accessToken);
     RefreshToken.set(refreshToken);
 
-    const user = await getUserMetadata();
-    const userStore = useUserStore();
-    
-    if (user) {
-        userStore.set(user);
-    } else {
-        throw new Error('errors.somethingFailed');
-    }
+    await loginWithTokens();
 
     return { ok: true };
 }

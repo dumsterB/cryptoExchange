@@ -18,11 +18,17 @@ const props = defineProps({
     max: {
         type: Number,
         default: 3
+    },
+    error: {
+        type: String,
+        default: ''
     }
 });
 
 const emit = defineEmits({
-    'update:modelValue': null
+    'update:modelValue': null,
+    'keydown': null,
+    'nothing-selected': null
 });
 
 const { t } = useI18n();
@@ -62,6 +68,10 @@ watch(isDropdownVisible, visible => {
         initClickOutside();
     } else {
         destroyClickOutside();
+
+        if (!selectedResult.code) {
+            emit('nothing-selected');
+        }
     }
 });
 
@@ -75,15 +85,22 @@ const selectResult = (code, text) => {
     
     closeDropdown();
 };
+
+const onKeydown = event => {
+    openDropdown();
+
+    emit('keydown', event);
+};
 </script>
 
 <template>
     <div :class="styles.wrap">
-
+    
         <VInput
             v-model="search"
             :label="t('country')"
-            @keydown="openDropdown"
+            :error="error"
+            @keydown="onKeydown"
         >
             <template #addon-left>
                 <FlagIcon

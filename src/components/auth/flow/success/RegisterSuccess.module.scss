@@ -1,0 +1,123 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 30px 20px;
+}
+
+.content {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    max-width: 390px;
+}
+
+.visual {
+    position: relative;
+    display: flex;
+    margin-bottom: 20px;
+
+    &Star {
+        position: absolute;
+        display: flex;
+        color: var(--color-primary);
+
+        &Xs {
+            left: -25px;
+            bottom: 22px;
+        }
+
+        &S {
+            top: -5px;
+            right: -30px;
+        }
+
+        &M {
+            top: -36px;
+            left: -10px;
+        }
+    }
+
+    &Check {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        background-color: var(--color-primary);
+        border-radius: 20px;
+    }
+}
+
+.title {
+    font-size: var(--text-headline-xl-font-size);
+    font-weight: var(--text-headline-xl-font-weight);
+    line-height: var(--text-headline-xl-line-height);
+    letter-spacing: -0.01em;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.description {
+    color: var(--color-typo-ghost);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.animEnter {
+    &From {
+        .content {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .visual {
+            &Star {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+    }
+
+    &To {
+        .content {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .visual {
+            &Start {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    }
+
+    &Active {
+        .content {
+            transition: transform 0.15s ease-in-out, opacity 0.12s linear;
+        }
+
+        .visual {
+            &Star {
+                transition: transform 0.15s ease-in-out, opacity 0.15s linear;
+                
+                &Xs {
+                    transition-delay: 0.2s;
+                }
+
+                &S {
+                    transition-delay: 0.35s;
+                }
+
+                &M {
+                    transition-delay: 0.5s;
+                }
+            }
+        }
+    }
+}
