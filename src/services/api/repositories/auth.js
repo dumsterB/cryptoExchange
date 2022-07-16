@@ -71,7 +71,7 @@ export async function submitPhoneOtp(waitListID, code) {
 export async function sendPersonalInfo(waitListID, { name, surname, country }) {
     const { message: { ID, ...result } } = await apiClient.post(
         '/waitlist/accept',
-        { waitListID, firstName: name, lastName: surname, country }
+        { waitListID, firstName: name, lastName: surname, countryCode: country }
     );
 
     return {
