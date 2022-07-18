@@ -1,16 +1,16 @@
 <script setup>
-import { computed, onMounted, onUnmounted, ref, useCssModule, watchEffect } from 'vue';
+import { computed, onMounted, onUnmounted, ref, toRef, useCssModule, watchEffect } from 'vue';
 import AssetIcon from '@/components/asset/icon/AssetIcon.vue';
-import { useMainStore } from '@/stores/main';
-import { useCurrencyFormat } from '@/utils/format/currency';
 import PercentChange from '@/components/general/percent/PercentChange.vue';
-import { setupChart } from './services/setup';
-import { useRealtimePriceChart } from '@/services/api/realtime/priceChart';
 import VIcon from '@/components/common/icon/VIcon.vue';
 import SkeletonBox from '@/components/general/skeleton/SkeletonBox';
+import { setupChart } from './services/setup';
 import { useI18n } from 'vue-i18n';
+import { useMainStore } from '@/stores/main';
+import { useCurrencyFormat } from '@/utils/format/currency';
+import { useChartSubscriber } from './hooks/useChartSubscriber';
+import { useRealtimePriceChart } from '@/services/api/realtime/priceChart';
 
-// TODO: v-if for chat canvas
 const props = defineProps({
     name: {
         type: String,
@@ -28,16 +28,27 @@ const props = defineProps({
         type: String,
         required: true
     },
-    topPadding: {
-        type: Number,
-        default: 20
+    padding: {
+        type: Object,
+        default: () => ({
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+        })
     },
+    delay: {
+        type: Number,
+        default: 0
+    },
+    ready: Boolean,
     mobile: Boolean
 });
 
 const { t } = useI18n();
 const mainStore = useMainStore();
 
+const isReady = toRef(props, 'ready');
 const currentPrice = ref(props.price);
 
 watchEffect(
@@ -69,7 +80,7 @@ const canvas = ref(null);
 const { initChart, setChartDatasets, pushToChartDataset, destroyChart, getRelativeChange } = setupChart(
     canvas,
     {
-        topPadding: props.topPadding,
+        padding: props.padding,
         hoverCallback: ctx => {
             const element = ctx.chart.getElementsAtEventForMode(ctx, 'index', {}, !0)?.[0];
 
@@ -84,7 +95,9 @@ const { initChart, setChartDatasets, pushToChartDataset, destroyChart, getRelati
     }
 );
 
-const relativeChange24h = computed(() => getRelativeChange(currentPrice.value));
+const relativeChange24h = computed(
+    () => getRelativeChange(currentPrice.value)
+);
 
 const {
     isLoading,
@@ -92,10 +105,15 @@ const {
     unsubscribeFromTickerChart
 } = useRealtimePriceChart(setChartDatasets, pushToChartDataset);
 
-watchEffect(() => subscribeToTickerChart(
-    props.symbol,
-    interval.value
-));
+useChartSubscriber(
+    () => subscribeToTickerChart(
+        props.symbol,
+        interval.value
+    ),
+    interval,
+    props.delay,
+    isReady
+);
 
 onMounted(initChart);
 
@@ -106,16 +124,24 @@ onUnmounted(() => {
 
 const styles = useCssModule('styles');
 
+const wrapClasses = computed(() => [styles.wrap, {
+    [styles.mobile]: props.mobile
+}]);
+
 const getIntervalClasses = current => {
     return [
         styles.interval,
         { [styles.active]: interval.value === current }
     ];
 };
+
+const preloaderIcon = props.mobile
+    ? 'chart-preloader-mobile'
+    : 'chart-preloader';
 </script>
 
 <template>
-    <div :class="styles.wrap">
+    <div :class="wrapClasses">
 
         <div :class="styles.head">
             <div :class="styles.info">
@@ -140,7 +166,10 @@ const getIntervalClasses = current => {
                         {{ pair }}
                     </div>
 
-                    <div :class="styles.assetTitle">
+                    <div
+                        v-else
+                        :class="styles.assetTitle"
+                    >
                         {{ name }} <span>({{ symbol }})</span>
                     </div>
                 </div>
@@ -210,7 +239,8 @@ const getIntervalClasses = current => {
         <div :class="styles.chart">
             <VIcon
                 v-if="isLoading"
-                name="chart-preloader"
+                :name="preloaderIcon"
+                :class="styles.chartPreloader"
             />
             
             <canvas

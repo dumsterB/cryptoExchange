@@ -27,6 +27,12 @@
     margin-bottom: 60px;
 }
 
+.popupClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
 @include max1200 {
     .grid {
         gap: 50px 42px;

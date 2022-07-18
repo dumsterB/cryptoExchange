@@ -15,6 +15,12 @@
     position: relative;
     flex: auto;
     height: 243px;
+
+    &Preloader {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
 }
 
 .asset,
@@ -66,7 +72,7 @@
 .percentSkeleton {
     display: flex;
     width: 70px;
-    height: 20px;
+    height: 25px;
 }
 
 .controls {
@@ -112,5 +118,84 @@
         background-color: var(--color-base);
         cursor: default;
         pointer-events: none;
+    }
+}
+
+// mobile
+.wrap.mobile {
+    .chart {
+        height: 395px;
+        margin: 0 -20px;
+
+        @include min768 {
+            margin: 0 -30px;
+        }
+
+        &Preloader {
+            left: unset;
+            right: 0;
+        }
+
+        @media (max-height: 700px) {
+            height: 350px;
+        }
+
+        @media (max-height: 600px) {
+            height: 240px;
+        }
+    }
+
+    .head {
+        flex-flow: column;
+        justify-content: flex-start;
+        margin-bottom: 30px;
+    }
+
+    .asset,
+    .assetSkeleton {
+        margin-bottom: 25px;
+    }
+
+    .asset {
+        &Title {
+            font-size: 20px;
+            margin-left: 8px;
+        }
+    }
+
+    .assetSkeleton {
+        height: 25px;
+    }
+
+    .price,
+    .priceSkeleton {
+        margin-bottom: 8px;
+    }
+
+    .price {
+        font-size: 30px;
+    }
+
+    .priceSkeleton {
+        height: 30px;
+    }
+    
+    .info {
+        margin-bottom: 30px;
+    }
+
+    @media (max-height: 700px) {
+        .head {
+            margin-bottom: 20px;
+        }
+        
+        .asset,
+        .assetSkeleton {
+            margin-bottom: 20px;
+        }
+
+        .info {
+            margin-bottom: 25px;
+        }
     }
 }

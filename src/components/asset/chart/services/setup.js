@@ -44,9 +44,10 @@ const SETTINGS = {
         },
         layout: {
             padding: {
-                left: 5,
-                right: 5,
-                bottom: 5
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
             }
         },
         plugins: {
@@ -165,15 +166,18 @@ function setPlugins() {
 export function setupChart(
     canvas,
     {
-        topPadding,
+        padding,
         hoverCallback = () => {}
     }
 ) {
     let chart;
-        
-    SETTINGS.options.onHover = hoverCallback;
-    SETTINGS.options.layout.padding.top = unref(topPadding);
+    
     SETTINGS.plugins = setPlugins();
+    SETTINGS.options.onHover = hoverCallback;
+    SETTINGS.options.layout.padding.top = padding.top ?? 0;
+    SETTINGS.options.layout.padding.left = padding.left ?? 0;
+    SETTINGS.options.layout.padding.right = padding.right ?? 0;
+    SETTINGS.options.layout.padding.bottom = padding.bottom ?? 0;
 
     const initChart = () => {
         chart = new Chart(

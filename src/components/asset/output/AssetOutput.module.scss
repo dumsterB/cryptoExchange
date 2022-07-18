@@ -25,6 +25,16 @@
     }
 }
 
+.assetSkeleton {
+    width: 120px;
+    height: 18px;
+}
+
+.address,
+.addressSkeleton {
+    margin-bottom: 16px;
+}
+
 .address {
     display: flex;
     align-items: center;
@@ -32,7 +42,6 @@
     color: var(--color-typo-ghost);
     font-size: 14px;
     font-weight: 400;
-    margin: 0;
     outline: 0;
     padding: 0;
     border: 0;
@@ -42,7 +51,6 @@
     text-align: center;
     cursor: pointer;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    margin-bottom: 16px;
 
     &Text {
         margin-right: 8px;
@@ -53,6 +61,11 @@
         display: inline-flex;
         flex-shrink: 0;
     }
+}
+
+.addressSkeleton {
+    width: 155px;
+    height: 16px;
 }
 
 .info {
@@ -68,12 +81,21 @@
     }
 }
 
+.balance,
+.balanceSkeleton {
+    margin-bottom: 16px;
+}
+
 .balance {
     font-size: var(--text-headline-xl-font-size);
     font-weight: var(--text-headline-xl-font-weight);
     line-height: var(--text-headline-xl-line-height);
     white-space: nowrap;
-    margin-bottom: 16px;
+}
+
+.balanceSkeleton {
+    width: 150px;
+    height: 34px;
 }
 
 .conversion {
@@ -81,6 +103,11 @@
     font-weight: 400;
     line-height: 1;
     white-space: nowrap;
+}
+
+.conversionSkeleton {
+    width: 60px;
+    height: 14px;
 }
 
 .actions {
@@ -126,6 +153,12 @@
         transition: color 0.1s linear;
     }
 
+    &Skeleton {
+        width: 44px;
+        height: 44px;
+        margin: 17px auto;
+    }
+
     @include hover {
         &:hover &Icon {
             border-color: var(--color-primary);
@@ -154,8 +187,16 @@
         }
     }
 
+    .assetSkeleton {
+        height: 18px;
+    }
+
     .actions {
         padding-bottom: 10px;
+    }
+
+    .balanceSkeleton {
+        height: 28px;
     }
 
     .action {
@@ -169,6 +210,12 @@
         &Text {
             font-size: 16px;
             line-height: 100%;
+        }
+
+        &Skeleton {
+            width: 40px;
+            height: 40px;
+            margin: 16px auto;
         }
     }
 }

@@ -1,30 +1,25 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+import AssetIcon from '../icon/AssetIcon.vue';
 import VIcon from '@/components/common/icon/VIcon.vue';
+import SafeShow from '../show/SafeShow.vue';
+import TooltipBox from '@/components/general/tooltip/TooltipBox';
+import SkeletonBox from '@/components/general/skeleton/SkeletonBox';
+import { useI18n } from 'vue-i18n';
 import { useClipboard } from '@/hooks/helpers/useClipboard'; 
 import { useCurrencyFormat } from '@/utils/format/currency';
 import { formatCoinQuantity } from '@/utils/format/coin';
 import { formatAddressToShort } from '@/utils/format/address';
-import { useI18n } from 'vue-i18n';
-import AssetIcon from '../icon/AssetIcon.vue';
-import SafeShow from '../show/SafeShow.vue';
 
+// TODO: prepare for fiat
 const props = defineProps({
-    id: {
-        type: [String, Number],
-        required: true
-    },
-    name: {
-        type: String,
-        required: true
-    },
     symbol: {
         type: String,
         required: true
     },
     chain: {
         type: [String, null],
-        required: true
+        default: null
     },
     address: {
         type: String,
@@ -34,51 +29,68 @@ const props = defineProps({
         type: Number,
         required: true
     },
+    price: {
+        type: Number,
+        required: true
+    },
     decimals: {
         type: Number,
-        default: 12
-    },
-    price: {
-        type: Object,
-        required: true,
-        default: () => ({
-            value: 0,
-            relativeChange24h: 0
-        })
+        default: 16
     },
     iconUrl: {
         type: String,
         required: true
-    }
+    },
+    loading: Boolean
 });
 
 const { t } = useI18n();
 const { formatCurrency } = useCurrencyFormat();
 
-const quantity = computed(() => {
-    return `${ formatCoinQuantity(props.value, props.decimals) } ${ props.symbol }`;
-});
+const quantity = computed(() => props.loading
+    ? null
+    : `${ formatCoinQuantity(props.value, props.decimals) }`
+);
 
-const conversion = computed(() => {
-    return formatCurrency(props.price.value * props.value);
-});
+const conversion = computed(() => props.loading
+    ? null
+    : formatCurrency(props.price * props.value)
+);
 
-const shortAddress = computed(() => {
-    return formatAddressToShort(props.address);
-});
+const shortAddress = computed(() => props.loading
+    ? null
+    : formatAddressToShort(props.address)
+);
 
 const {
+    isCopied,
     isCopySupported,
-    // isCopiedToClipboard,
     copyToClipboard
 } = useClipboard();
+
+const isTooltipVisible = ref(false);
+
+const tooltipContent = computed(() => isCopied.value
+    ? t('copied')
+    : t('copy')
+);
+
+const showTooltip = () => isTooltipVisible.value = true;
+const hideTooltip = () => isTooltipVisible.value = false;
 </script>
 
 <template>
     <div :class="styles.output">
 
         <div :class="styles.head">
-            <div :class="styles.asset">
+            <SkeletonBox
+                v-if="loading"
+                :class="styles.assetSkeleton"
+            />
+            <div
+                v-else
+                :class="styles.asset"
+            >
                 <AssetIcon
                     :src="iconUrl"
                     size="s"
@@ -88,35 +100,68 @@ const {
                     {{ symbol }} <span v-if="chain">({{ chain }})</span>
                 </div>
             </div>
+            
         </div>
 
         <div :class="styles.info">
             <!-- TODO: tooltip -->
             <div :class="styles.infoContent">
-                <button
-                    :class="styles.address"
-                    @click="copyToClipboard(address)"
+                <SkeletonBox
+                    v-if="loading"
+                    :class="styles.addressSkeleton"
+                />
+                <TooltipBox
+                    v-else
+                    :show="isTooltipVisible"
+                    placement="top"
+                    arrow
                 >
-                    <span :class="styles.addressText">
-                        {{ shortAddress }}
-                    </span>
-
-                    <span
-                        v-if="isCopySupported"
-                        :class="styles.addressIcon"
+                    <button
+                        :class="styles.address"
+                        @mouseenter="showTooltip"
+                        @mouseleave="hideTooltip"
+                        @touchstart="showTooltip"
+                        @touchend="hideTooltip"
+                        @click="copyToClipboard(address)"
                     >
-                        <VIcon name="copy" />
-                    </span>
-                </button>
+                        <span :class="styles.addressText">
+                            {{ shortAddress }}
+                        </span>
 
-                
-                <div :class="styles.balance">
+                        <span
+                            v-if="isCopySupported"
+                            :class="styles.addressIcon"
+                        >
+                            <VIcon name="copy" />
+                        </span>
+                    </button>
+
+                    <template #content>
+                        {{ tooltipContent }}
+                    </template>
+                </TooltipBox>
+
+                <SkeletonBox
+                    v-if="loading"
+                    :class="styles.balanceSkeleton"
+                />
+                <div
+                    v-else
+                    :class="styles.balance"
+                >
                     <SafeShow>
-                        {{ quantity }}
+                        {{ quantity }} <span>{{ symbol }}</span>
                     </SafeShow>
                 </div>
 
-                <div :class="styles.conversion">
+                <SkeletonBox
+                    v-if="loading"
+                    :class="styles.conversionSkeleton"
+                />
+                <div
+                    v-else
+                    :class="styles.conversion"
+                >
                     <SafeShow>
                         ≈ {{ conversion }}
                     </SafeShow>
@@ -127,7 +172,12 @@ const {
         <div :class="styles.actions">
             <!-- TODO: real url -->
             <div :class="styles.action">
+                <SkeletonBox
+                    v-if="loading"
+                    :class="styles.actionSkeleton"
+                />
                 <RouterLink
+                    v-else
                     to="/"
                     :class="styles.actionWrap"
                 >
@@ -142,7 +192,12 @@ const {
             </div>
 
             <div :class="styles.action">
+                <SkeletonBox
+                    v-if="loading"
+                    :class="styles.actionSkeleton"
+                />
                 <RouterLink
+                    v-else
                     to="/"
                     :class="styles.actionWrap"
                 >
@@ -157,7 +212,12 @@ const {
             </div>
 
             <div :class="styles.action">
+                <SkeletonBox
+                    v-if="loading"
+                    :class="styles.actionSkeleton"
+                />
                 <RouterLink
+                    v-else
                     to="/"
                     :class="styles.actionWrap"
                 >
