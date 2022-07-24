@@ -10,7 +10,7 @@ import UserPreview from '@/components/user/preview/UserPreview.vue';
 import SettingsButton from '@/components/general/button/SettingsButton';
 import VerificationStatus from '@/components/user/verification/status/VerificationStatus.vue';
 
-import { useScrollLock } from '@/composables/useScrollLock';
+import { useScrollLock } from '@/hooks/helpers/useScrollLock';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
