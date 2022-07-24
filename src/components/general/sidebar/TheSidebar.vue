@@ -1,10 +1,10 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
-import PortfolioBalance from '@/components/general/balance/PortfolioBalance.vue'
-import MenuLink from '@/components/general/MenuLink.vue'
-import UserPreview from '@/components/user/preview/UserPreview.vue'
-import VIcon from '@/components/common/icon/VIcon.vue'
-import { visible as isPromoVisible, hide as hidePromo } from '@/services/cryptoCardPromo'
+import { useI18n } from 'vue-i18n';
+import PortfolioBalance from '@/components/general/balance/PortfolioBalance.vue';
+import MenuLink from '@/components/general/MenuLink.vue';
+import UserPreview from '@/components/user/preview/UserPreview.vue';
+import VIcon from '@/components/common/icon/VIcon.vue';
+import { visible as isPromoVisible, hide as hidePromo } from '@/services/cryptoCardPromo';
 
 const { t } = useI18n();
 </script>
@@ -13,7 +13,12 @@ const { t } = useI18n();
     <div :class="styles.sidebar">
 
         <div :class="styles.logo">
-            <VIcon name="logo" />
+            <RouterLink
+                to="/"
+                :class="styles.logoLink"
+            >
+                <VIcon name="logo" />
+            </RouterLink>
         </div>
     
         <UserPreview :class="styles.user">
