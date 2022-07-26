@@ -1,3 +1,4 @@
+import { currencies } from '../store/currency';
 import { getFormatter } from './formatter';
 
 export function formatCurrency(value, locale, currencyCode) {
@@ -15,8 +16,14 @@ export function formatCurrencyToParts(value, locale, currencyCode) {
         currencyCode
     );
 
+    const currency = currencies[currencyCode];
+
     if (!formatter.formatToParts)
         return [ value ]; // TODO: custom format to parts
 
-    return formatter.formatToParts(value);
+    const parts = formatter.formatToParts(value);
+
+    return currency.modifyParts
+        ? currency.modifyParts(parts)
+        : parts;
 }

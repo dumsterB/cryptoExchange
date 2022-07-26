@@ -24,11 +24,11 @@ function CurrencyNumber(
                 style: {
                     color: isFraction
                         ? fractionColor
-                        : color,
-                    class: isFraction && fractionClass
-                        ? fractionClass
-                        : null
-                }
+                        : color
+                },
+                class: isFraction && fractionClass
+                    ? fractionClass
+                    : null
             }, value);
         })
     );
