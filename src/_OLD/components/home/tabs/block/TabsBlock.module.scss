@@ -1,0 +1,44 @@
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    margin-bottom: 60px;
+}
+
+.title {
+    display: inline-block;
+    border: 0px;
+    outline: 0px;
+    padding: 0px;
+    background: none;
+    color: var(--color-typo-ghost);
+    font-weight: var(--text-headline-m-font-weight);
+    font-size: var(--text-headline-m-font-size);
+    line-height: var(--text-headline-m-line-height);
+    user-select: none;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.1s linear;
+
+    &.active {
+        color: var(--color-typo-base);
+    }
+
+    & + .title {
+        margin-left: 40px;
+    }
+}
+
+
+@include max767 {
+    .head {
+        margin-bottom: 32px;
+    }
+
+    .title {
+        & + .title {
+            margin-left: 20px;
+        }
+    }
+}

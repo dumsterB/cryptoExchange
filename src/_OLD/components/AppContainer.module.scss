@@ -1,0 +1,22 @@
+.container {
+    width: 100%;
+    max-width: 1068px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@include max1200 {
+    .container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@include max767 {
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
