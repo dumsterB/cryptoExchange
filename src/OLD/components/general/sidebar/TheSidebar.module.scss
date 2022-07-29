@@ -1,0 +1,133 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: column;
+    width: 282px;
+    padding: 20px 8px;
+    border-right: 1px solid var(--color-stroke);
+    overflow-y: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    height: 40px;
+    padding: 0 8px;
+    margin-bottom: 60px;
+
+    &Link {
+        display: flex;
+        user-select: text;
+        text-decoration: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+}
+
+.user {
+    margin-bottom: 40px;
+
+    &Balance {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.01em;
+    }
+}
+
+.promo {
+    position: relative;
+    padding: 91px 8px 0;
+    flex-shrink: 0;
+    margin-top: auto;
+    color: var(--color-typo-base);
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    user-select: text;
+
+    &Wrap {
+        position: relative;
+        padding: 82px 16px 16px;
+        background: linear-gradient(180deg, var(--color-surface) 0%, rgba(242, 243, 249, 0) 100%);
+        border-radius: 16px;
+        text-align: center;
+    }
+    
+    &Card {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        width: 160px;
+        height: 137px;
+        background-image: url('/images/cryptocard-sidebar.png');
+        background-size: 100%;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        transform: translate(-50%, 0);
+        z-index: 2;
+    
+        @include retina2x() {
+            background-image: url('/images/cryptocard-sidebar@2x.png');
+        }
+    
+        @include retina3x() {
+            background-image: url('/images/cryptocard-sidebar@3x.png');
+        }
+    }
+    
+    &Title {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 13px;
+    }
+    
+    &Text {
+        color: var(--color-typo-ghost);
+        font-size: 14px;
+        line-height: 1.15;
+    }
+    
+    &Close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        color: var(--color-typo-base);
+        background-color: var(--color-stroke);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    
+        @include hover {
+            &:hover {
+                color: var(--color-typo-inverse);
+                background-color: var(--color-primary);
+            }
+        }
+    }
+}
+
+@include max1400 {
+    .sidebar {
+        width: 110px;
+    }
+
+    .promo {
+        display: none;
+    }
+}
+
+@include max1200 {
+    .sidebar {
+        display: none;
+    }
+}

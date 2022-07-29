@@ -1,0 +1,34 @@
+.decorations {
+    --font-family-input: 'Normalidad';
+    --font-family-button: 'Normalidad';
+
+    --text-headline-xl-font-size: 34px;
+    --text-headline-xl-font-weight: 400;
+    --text-headline-xl-line-height: 1;
+    
+    --text-headline-l-font-size: 24px;
+    --text-headline-l-font-weight: 400;
+    --text-headline-l-line-height: 1;
+
+    --text-headline-m-font-size: 22px;
+    --text-headline-m-font-weight: 400;
+    --text-headline-m-line-height: 1;
+
+    --popup-dialog-padding: 30px;
+    --popup-dialog-box-shadow: 0px 38px 70px rgba(0, 0, 0, 0.12);
+    --popup-dialog-border-radius: 20px;
+    --popup-pane-padding: 16px;
+    --popup-pane-box-shadow: 0px 16px 40px #E3E2E7;
+    --popup-pane-border-radius: 16px;
+    --popup-bottom-sheet-padding: 20px;
+    --popup-bottom-sheet-box-shadow: 0px -10px 70px rgba(0, 0, 0, 0.12);
+    --popup-bottom-sheet-border-radius: 20px 20px 0px 0px;
+}
+
+
+@include max767 {
+    .decorations {
+        --text-headline-xl-font-size: 28px;
+        --text-headline-m-font-size: 16px;
+    }
+}

@@ -1,0 +1,130 @@
+.select {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+    flex-shrink: 0;
+    background: transparent;
+    border: 0;
+    padding: 0 16px 0 18px;
+    margin: 0;
+    font-family: inherit;
+    line-height: inherit;
+    color: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%);
+        width: 1px;
+        height: 28px;
+        background-color: var(--color-stroke);
+    }
+
+    &Flag {
+        margin-right: 8px;
+    }
+
+    &Text {
+        margin-right: 12px;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+    }
+
+    &Arrow {
+        display: flex;
+        color: var(--color-typo-base);
+        will-change: transform;
+        transition: transform 0.15s linear;
+    }
+
+    &.opened &Arrow {
+        transform: scaleY(-1);
+    }
+}
+
+.popupBody {
+    max-height: 364px;
+    margin: 0 -24px;
+}
+
+.list {
+    min-width: 0;
+    list-style-type: none;
+    padding: 0 8px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.country {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    height: 60px;
+    padding: 0 18px;
+    background-color: transparent;
+    user-select: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    border-radius: 16px;
+    transition: background-color 0.15s linear;
+
+    @include hover {
+        &:hover {
+            background-color: var(--color-surface);
+        }
+    }
+
+    &Flag {
+        margin-right: 12px;
+    }
+
+    &Text,
+    &Phone {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: -0.02em;
+    }
+
+    &Text {
+        color: var(--color-typo-base);
+        margin-right: 20px;
+    }
+
+    &Phone {
+        color: var(--color-typo-ghost);
+    }
+
+    & + .country {
+        margin-top: 16px;
+    }
+}
+
+@include max767 {
+    .popupBody {
+        margin: 0 0 -20px 0;
+        max-height: 478px;
+    }
+
+    .list {
+        padding: 0;
+    }
+
+    .country {
+        padding: 0;
+        
+        & + .country {
+            margin: 0;
+        }
+    }
+}

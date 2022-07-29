@@ -1,0 +1,953 @@
+[{
+    "code": "au",
+    "text": "Австралия",
+    "dialCode": "+61"
+}, {
+    "code": "at",
+    "text": "Австрия",
+    "dialCode": "+43"
+}, {
+    "code": "az",
+    "text": "Азербайджан",
+    "dialCode": "+994"
+}, {
+    "code": "ax",
+    "text": "Аландские острова",
+    "dialCode": "+358"
+}, {
+    "code": "al",
+    "text": "Албания",
+    "dialCode": "+355"
+}, {
+    "code": "dz",
+    "text": "Алжир",
+    "dialCode": "+213"
+}, {
+    "code": "vi",
+    "text": "Американские Виргинские острова",
+    "dialCode": "+1340"
+}, {
+    "code": "as",
+    "text": "Американское Самоа",
+    "dialCode": "+1684"
+}, {
+    "code": "ai",
+    "text": "Ангилья",
+    "dialCode": "+1264"
+}, {
+    "code": "ao",
+    "text": "Ангола",
+    "dialCode": "+244"
+}, {
+    "code": "ad",
+    "text": "Андорра",
+    "dialCode": "+376"
+}, {
+    "code": "aq",
+    "text": "Антарктида",
+    "dialCode": "+672"
+}, {
+    "code": "ag",
+    "text": "Антигуа и Барбуда",
+    "dialCode": "+1268"
+}, {
+    "code": "ar",
+    "text": "Аргентина",
+    "dialCode": "+54"
+}, {
+    "code": "am",
+    "text": "Армения",
+    "dialCode": "+374"
+}, {
+    "code": "aw",
+    "text": "Аруба",
+    "dialCode": "+297"
+}, {
+    "code": "af",
+    "text": "Афганистан",
+    "dialCode": "+93"
+}, {
+    "code": "bs",
+    "text": "Багамы",
+    "dialCode": "+1242"
+}, {
+    "code": "bt",
+    "text": "Бутан",
+    "dialCode": "+975"
+}, {
+    "code": "bd",
+    "text": "Бангладеш",
+    "dialCode": "+880"
+}, {
+    "code": "bb",
+    "text": "Барбадос",
+    "dialCode": "+1246"
+}, {
+    "code": "bh",
+    "text": "Бахрейн",
+    "dialCode": "+973"
+}, {
+    "code": "bz",
+    "text": "Белиз",
+    "dialCode": "+501"
+}, {
+    "code": "by",
+    "text": "Белоруссия",
+    "dialCode": "+375"
+}, {
+    "code": "be",
+    "text": "Бельгия",
+    "dialCode": "+32"
+}, {
+    "code": "bj",
+    "text": "Бенин",
+    "dialCode": "+229"
+}, {
+    "code": "bl",
+    "text": "Сен-Бартелеми",
+    "dialCode": "+590"
+}, {
+    "code": "bm",
+    "text": "Бермуды",
+    "dialCode": "+1441"
+}, {
+    "code": "bg",
+    "text": "Болгария",
+    "dialCode": "+359"
+}, {
+    "code": "bo",
+    "text": "Боливия",
+    "dialCode": "+591"
+}, {
+    "code": "ba",
+    "text": "Босния и Герцеговина",
+    "dialCode": "+387"
+}, {
+    "code": "bw",
+    "text": "Ботсвана",
+    "dialCode": "+267"
+}, {
+    "code": "br",
+    "text": "Бразилия",
+    "dialCode": "+55"
+}, {
+    "code": "io",
+    "text": "Британская территория в Индийском океане",
+    "dialCode": "+246"
+}, {
+    "code": "vg",
+    "text": "Британские Виргинские острова",
+    "dialCode": "+1284"
+}, {
+    "code": "bn",
+    "text": "Бруней",
+    "dialCode": "+673"
+}, {
+    "code": "bf",
+    "text": "Буркина Фасо",
+    "dialCode": "+226"
+}, {
+    "code": "bi",
+    "text": "Бурунди",
+    "dialCode": "+257"
+}, {
+    "code": "vu",
+    "text": "Вануату",
+    "dialCode": "+678"
+}, {
+    "code": "va",
+    "text": "Ватикан",
+    "dialCode": "+379"
+}, {
+    "code": "gb",
+    "text": "Великобритания",
+    "dialCode": "+44"
+}, {
+    "code": "hu",
+    "text": "Венгрия",
+    "dialCode": "+36"
+}, {
+    "code": "ve",
+    "text": "Венесуэла",
+    "dialCode": "+58"
+}, {
+    "code": "tl",
+    "text": "Восточный Тимор",
+    "dialCode": "+670"
+}, {
+    "code": "vn",
+    "text": "Вьетнам",
+    "dialCode": "+84"
+}, {
+    "code": "ga",
+    "text": "Габон",
+    "dialCode": "+241"
+}, {
+    "code": "ht",
+    "text": "Гаити",
+    "dialCode": "+509"
+}, {
+    "code": "gy",
+    "text": "Гайана",
+    "dialCode": "+595"
+}, {
+    "code": "gp",
+    "text": "Гваделупа",
+    "dialCode": "+590"
+}, {
+    "code": "gt",
+    "text": "Гватемала",
+    "dialCode": "+502"
+}, {
+    "code": "gn",
+    "text": "Гвинея",
+    "dialCode": "+224"
+}, {
+    "code": "gw",
+    "text": "Гвинея-Бисау",
+    "dialCode": "+245"
+}, {
+    "code": "de",
+    "text": "Германия",
+    "dialCode": "+49"
+}, {
+    "code": "gi",
+    "text": "Гибралтар",
+    "dialCode": "+350"
+}, {
+    "code": "hn",
+    "text": "Гондурас",
+    "dialCode": "+504"
+}, {
+    "code": "hk",
+    "text": "Гонконг",
+    "dialCode": "+852"
+}, {
+    "code": "gd",
+    "text": "Гренада",
+    "dialCode": "+1473"
+}, {
+    "code": "gl",
+    "text": "Гренландия",
+    "dialCode": "+299"
+}, {
+    "code": "gm",
+    "text": "Гамбия",
+    "dialCode": "+220"
+}, {
+    "code": "gr",
+    "text": "Греция",
+    "dialCode": "+30"
+}, {
+    "code": "ge",
+    "text": "Грузия",
+    "dialCode": "+995"
+}, {
+    "code": "gu",
+    "text": "Гуам",
+    "dialCode": "+1671"
+}, {
+    "code": "dk",
+    "text": "Дания",
+    "dialCode": "+45"
+}, {
+    "code": "cd",
+    "text": "ДР Конго",
+    "dialCode": "+243"
+}, {
+    "code": "dj",
+    "text": "Джибути",
+    "dialCode": "+253"
+}, {
+    "code": "dm",
+    "text": "Доминика",
+    "dialCode": "+1767"
+}, {
+    "code": "do",
+    "text": "Доминиканская Республика",
+    "dialCode": "+1849"
+}, {
+    "code": "eg",
+    "text": "Египет",
+    "dialCode": "+20"
+}, {
+    "code": "zm",
+    "text": "Замбия",
+    "dialCode": "+260"
+}, {
+    "code": "zw",
+    "text": "Зимбабве",
+    "dialCode": "+263"
+}, {
+    "code": "il",
+    "text": "Израиль",
+    "dialCode": "+972"
+}, {
+    "code": "im",
+    "text": "Остров Мэн",
+    "dialCode": "+44"
+}, {
+    "code": "in",
+    "text": "Индия",
+    "dialCode": "+91"
+}, {
+    "code": "id",
+    "text": "Индонезия",
+    "dialCode": "+62"
+}, {
+    "code": "jo",
+    "text": "Иордания",
+    "dialCode": "+962"
+}, {
+    "code": "iq",
+    "text": "Ирак",
+    "dialCode": "+964"
+}, {
+    "code": "ie",
+    "text": "Ирландия",
+    "dialCode": "+353"
+}, {
+    "code": "is",
+    "text": "Исландия",
+    "dialCode": "+354"
+}, {
+    "code": "es",
+    "text": "Испания",
+    "dialCode": "+34"
+}, {
+    "code": "it",
+    "text": "Италия",
+    "dialCode": "+39"
+}, {
+    "code": "je",
+    "text": "Джерси",
+    "dialCode": "+44"
+}, {
+    "code": "ye",
+    "text": "Йемен",
+    "dialCode": "+967"
+}, {
+    "code": "cv",
+    "text": "Кабо-Верде",
+    "dialCode": "+238"
+}, {
+    "code": "kz",
+    "text": "Казахстан",
+    "dialCode": "+77"
+}, {
+    "code": "ky",
+    "text": "Каймановы острова",
+    "dialCode": "+ 345"
+}, {
+    "code": "kh",
+    "text": "Камбоджа",
+    "dialCode": "+855"
+}, {
+    "code": "cm",
+    "text": "Камерун",
+    "dialCode": "+237"
+}, {
+    "code": "ca",
+    "text": "Канада",
+    "dialCode": "+1"
+}, {
+    "code": "qa",
+    "text": "Катар",
+    "dialCode": "+974"
+}, {
+    "code": "ke",
+    "text": "Кения",
+    "dialCode": "+254"
+}, {
+    "code": "cy",
+    "text": "Кипр",
+    "dialCode": "+357"
+}, {
+    "code": "kg",
+    "text": "Киргизия",
+    "dialCode": "+996"
+}, {
+    "code": "ki",
+    "text": "Кирибати",
+    "dialCode": "+686"
+}, {
+    "code": "cn",
+    "text": "КНР",
+    "dialCode": "+86"
+}, {
+    "code": "cc",
+    "text": "Кокосовые острова",
+    "dialCode": "+61"
+}, {
+    "code": "co",
+    "text": "Колумбия",
+    "dialCode": "+57"
+}, {
+    "code": "km",
+    "text": "Коморы",
+    "dialCode": "+269"
+}, {
+    "code": "cr",
+    "text": "Коста-Рика",
+    "dialCode": "+506"
+}, {
+    "code": "ci",
+    "text": "Кот-д’Ивуар",
+    "dialCode": "+225"
+}, {
+    "code": "cu",
+    "text": "Куба",
+    "dialCode": "+53"
+}, {
+    "code": "kw",
+    "text": "Кувейт",
+    "dialCode": "+965"
+}, {
+    "code": "la",
+    "text": "Лаос",
+    "dialCode": "+856"
+}, {
+    "code": "lv",
+    "text": "Латвия",
+    "dialCode": "+371"
+}, {
+    "code": "ls",
+    "text": "Лесото",
+    "dialCode": "+266"
+}, {
+    "code": "lr",
+    "text": "Либерия",
+    "dialCode": "+231"
+}, {
+    "code": "lb",
+    "text": "Ливан",
+    "dialCode": "+961"
+}, {
+    "code": "ly",
+    "text": "Ливия",
+    "dialCode": "+218"
+}, {
+    "code": "lt",
+    "text": "Литва",
+    "dialCode": "+370"
+}, {
+    "code": "li",
+    "text": "Лихтенштейн",
+    "dialCode": "+423"
+}, {
+    "code": "lu",
+    "text": "Люксембург",
+    "dialCode": "+352"
+}, {
+    "code": "mu",
+    "text": "Маврикий",
+    "dialCode": "+230"
+}, {
+    "code": "mr",
+    "text": "Мавритания",
+    "dialCode": "+222"
+}, {
+    "code": "mg",
+    "text": "Мадагаскар",
+    "dialCode": "+261"
+}, {
+    "code": "yt",
+    "text": "Майотта",
+    "dialCode": "+262"
+}, {
+    "code": "mo",
+    "text": "Макао",
+    "dialCode": "+853"
+}, {
+    "code": "mk",
+    "text": "Республика Македония",
+    "dialCode": "+389"
+}, {
+    "code": "mw",
+    "text": "Малави",
+    "dialCode": "+265"
+}, {
+    "code": "my",
+    "text": "Малайзия",
+    "dialCode": "+60"
+}, {
+    "code": "ml",
+    "text": "Мали",
+    "dialCode": "+223"
+}, {
+    "code": "mv",
+    "text": "Мальдивы",
+    "dialCode": "+960"
+}, {
+    "code": "mt",
+    "text": "Мальта",
+    "dialCode": "+356"
+}, {
+    "code": "ma",
+    "text": "Марокко",
+    "dialCode": "+212"
+}, {
+    "code": "mq",
+    "text": "Мартиника",
+    "dialCode": "+596"
+}, {
+    "code": "mh",
+    "text": "Маршалловы Острова",
+    "dialCode": "+692"
+}, {
+    "code": "mx",
+    "text": "Мексика",
+    "dialCode": "+52"
+}, {
+    "code": "mz",
+    "text": "Мозамбик",
+    "dialCode": "+258"
+}, {
+    "code": "md",
+    "text": "Молдавия",
+    "dialCode": "+373"
+}, {
+    "code": "mc",
+    "text": "Монако",
+    "dialCode": "+377"
+}, {
+    "code": "mn",
+    "text": "Монголия",
+    "dialCode": "+976"
+}, {
+    "code": "ms",
+    "text": "Монтсеррат",
+    "dialCode": "+1664"
+}, {
+    "code": "mm",
+    "text": "Мьянма",
+    "dialCode": "+95"
+}, {
+    "code": "na",
+    "text": "Намибия",
+    "dialCode": "+264"
+}, {
+    "code": "nr",
+    "text": "Науру",
+    "dialCode": "+674"
+}, {
+    "code": "np",
+    "text": "Непал",
+    "dialCode": "+977"
+}, {
+    "code": "ne",
+    "text": "Нигер",
+    "dialCode": "+227"
+}, {
+    "code": "ng",
+    "text": "Нигерия",
+    "dialCode": "+234"
+}, {
+    "code": "nl",
+    "text": "Нидерланды",
+    "dialCode": "+31"
+}, {
+    "code": "ni",
+    "text": "Никарагуа",
+    "dialCode": "+505"
+}, {
+    "code": "nu",
+    "text": "Ниуэ",
+    "dialCode": "+683"
+}, {
+    "code": "nc",
+    "text": "Новая Каледония",
+    "dialCode": "+687"
+}, {
+    "code": "nz",
+    "text": "Новая Зеландия",
+    "dialCode": "+64"
+}, {
+    "code": "no",
+    "text": "Норвегия",
+    "dialCode": "+47"
+}, {
+    "code": "ae",
+    "text": "ОАЭ",
+    "dialCode": "+971"
+}, {
+    "code": "om",
+    "text": "Оман",
+    "dialCode": "+968"
+}, {
+    "code": "cx",
+    "text": "Остров Рождества",
+    "dialCode": "+61"
+}, {
+    "code": "ck",
+    "text": "Острова Кука",
+    "dialCode": "+682"
+}, {
+    "code": "pk",
+    "text": "Пакистан",
+    "dialCode": "+92"
+}, {
+    "code": "pw",
+    "text": "Палау",
+    "dialCode": "+680"
+}, {
+    "code": "ps",
+    "text": "Палестина",
+    "dialCode": "+970"
+}, {
+    "code": "pa",
+    "text": "Панама",
+    "dialCode": "+507"
+}, {
+    "code": "pg",
+    "text": "Папуа — Новая Гвинея",
+    "dialCode": "+675"
+}, {
+    "code": "py",
+    "text": "Парагвай",
+    "dialCode": "+595"
+}, {
+    "code": "pe",
+    "text": "Перу",
+    "dialCode": "+51"
+}, {
+    "code": "pn",
+    "text": "Острова Питкэрн",
+    "dialCode": "+872"
+}, {
+    "code": "pl",
+    "text": "Польша",
+    "dialCode": "+48"
+}, {
+    "code": "pt",
+    "text": "Португалия",
+    "dialCode": "+351"
+}, {
+    "code": "pr",
+    "text": "Пуэрто-Рико",
+    "dialCode": "+1939"
+}, {
+    "code": "cg",
+    "text": "Республика Конго",
+    "dialCode": "+242"
+}, {
+    "code": "re",
+    "text": "Реюньон",
+    "dialCode": "+262"
+}, {
+    "code": "ru",
+    "text": "Россия",
+    "dialCode": "+7"
+}, {
+    "code": "rw",
+    "text": "Руанда",
+    "dialCode": "+250"
+}, {
+    "code": "ro",
+    "text": "Румыния",
+    "dialCode": "+40"
+}, {
+    "code": "sv",
+    "text": "Сальвадор",
+    "dialCode": "+503"
+}, {
+    "code": "ws",
+    "text": "Самоа",
+    "dialCode": "+685"
+}, {
+    "code": "sm",
+    "text": "Сан-Марино",
+    "dialCode": "+378"
+}, {
+    "code": "st",
+    "text": "Сан-Томе и Принсипи",
+    "dialCode": "+239"
+}, {
+    "code": "sa",
+    "text": "Саудовская Аравия",
+    "dialCode": "+966"
+}, {
+    "code": "sz",
+    "text": "Свазиленд",
+    "dialCode": "+268"
+}, {
+    "code": "sj",
+    "text": "Шпицберген и Ян-Майен",
+    "dialCode": "+47"
+}, {
+    "code": "mp",
+    "text": "Северные Марианские острова",
+    "dialCode": "+1670"
+}, {
+    "code": "sc",
+    "text": "Сейшельские Острова",
+    "dialCode": "+248"
+}, {
+    "code": "sn",
+    "text": "Сенегал",
+    "dialCode": "+221"
+}, {
+    "code": "vc",
+    "text": "Сент-Винсент и Гренадины",
+    "dialCode": "+1784"
+}, {
+    "code": "kn",
+    "text": "Сент-Китс и Невис",
+    "dialCode": "+1869"
+}, {
+    "code": "lc",
+    "text": "Сент-Люсия",
+    "dialCode": "+1758"
+}, {
+    "code": "pm",
+    "text": "Сен-Пьер и Микелон",
+    "dialCode": "+508"
+}, {
+    "code": "rs",
+    "text": "Сербия",
+    "dialCode": "+381"
+}, {
+    "code": "sg",
+    "text": "Сингапур",
+    "dialCode": "+65"
+}, {
+    "code": "sy",
+    "text": "Сирия",
+    "dialCode": "+963"
+}, {
+    "code": "sk",
+    "text": "Словакия",
+    "dialCode": "+421"
+}, {
+    "code": "si",
+    "text": "Словения",
+    "dialCode": "+386"
+}, {
+    "code": "sb",
+    "text": "Соломоновы Острова",
+    "dialCode": "+677"
+}, {
+    "code": "so",
+    "text": "Сомали",
+    "dialCode": "+252"
+}, {
+    "code": "sd",
+    "text": "Судан",
+    "dialCode": "+249"
+}, {
+    "code": "sr",
+    "text": "Суринам",
+    "dialCode": "+597"
+}, {
+    "code": "ss",
+    "text": "Южный Судан",
+    "dialCode": "+211"
+}, {
+    "code": "sl",
+    "text": "Сьерра-Леоне",
+    "dialCode": "+232"
+}, {
+    "code": "tj",
+    "text": "Таджикистан",
+    "dialCode": "+992"
+}, {
+    "code": "th",
+    "text": "Таиланд",
+    "dialCode": "+66"
+}, {
+    "code": "tw",
+    "text": "Китайская Республика",
+    "dialCode": "+886"
+}, {
+    "code": "tz",
+    "text": "Танзания",
+    "dialCode": "+255"
+}, {
+    "code": "tg",
+    "text": "Того",
+    "dialCode": "+228"
+}, {
+    "code": "tk",
+    "text": "Токелау",
+    "dialCode": "+690"
+}, {
+    "code": "to",
+    "text": "Тонга",
+    "dialCode": "+676"
+}, {
+    "code": "tt",
+    "text": "Тринидад и Тобаго",
+    "dialCode": "+1868"
+}, {
+    "code": "tv",
+    "text": "Тувалу",
+    "dialCode": "+688"
+}, {
+    "code": "tn",
+    "text": "Тунис",
+    "dialCode": "+216"
+}, {
+    "code": "tm",
+    "text": "Туркмения",
+    "dialCode": "+993"
+}, {
+    "code": "tr",
+    "text": "Турция",
+    "dialCode": "+90"
+}, {
+    "code": "ug",
+    "text": "Уганда",
+    "dialCode": "+256"
+}, {
+    "code": "uz",
+    "text": "Узбекистан",
+    "dialCode": "+998"
+}, {
+    "code": "ua",
+    "text": "Украина",
+    "dialCode": "+380"
+}, {
+    "code": "uy",
+    "text": "Уругвай",
+    "dialCode": "+598"
+}, {
+    "code": "fo",
+    "text": "Фарерские острова",
+    "dialCode": "+298"
+}, {
+    "code": "fm",
+    "text": "Микронезия",
+    "dialCode": "+691"
+}, {
+    "code": "fj",
+    "text": "Фиджи",
+    "dialCode": "+679"
+}, {
+    "code": "ph",
+    "text": "Филиппины",
+    "dialCode": "+63"
+}, {
+    "code": "fi",
+    "text": "Финляндия",
+    "dialCode": "+358"
+}, {
+    "code": "fk",
+    "text": "Фолклендские острова",
+    "dialCode": "+500"
+}, {
+    "code": "fr",
+    "text": "Франция",
+    "dialCode": "+33"
+}, {
+    "code": "gf",
+    "text": "Французская Гвиана",
+    "dialCode": "+594"
+}, {
+    "code": "gg",
+    "text": "Гернси",
+    "dialCode": "+44"
+}, {
+    "code": "gh",
+    "text": "Гана",
+    "dialCode": "+233"
+}, {
+    "code": "pf",
+    "text": "Французская Полинезия",
+    "dialCode": "+689"
+}, {
+    "code": "hr",
+    "text": "Хорватия",
+    "dialCode": "+385"
+}, {
+    "code": "cf",
+    "text": "ЦАР",
+    "dialCode": "+236"
+}, {
+    "code": "td",
+    "text": "Чад",
+    "dialCode": "+235"
+}, {
+    "code": "me",
+    "text": "Черногория",
+    "dialCode": "+382"
+}, {
+    "code": "mf",
+    "text": "Сен-Мартен",
+    "dialCode": "+590"
+}, {
+    "code": "cz",
+    "text": "Чехия",
+    "dialCode": "+420"
+}, {
+    "code": "cl",
+    "text": "Чили",
+    "dialCode": "+56"
+}, {
+    "code": "ch",
+    "text": "Швейцария",
+    "dialCode": "+41"
+}, {
+    "code": "se",
+    "text": "Швеция",
+    "dialCode": "+46"
+}, {
+    "code": "lk",
+    "text": "Шри-Ланка",
+    "dialCode": "+94"
+}, {
+    "code": "ec",
+    "text": "Эквадор",
+    "dialCode": "+593"
+}, {
+    "code": "gq",
+    "text": "Экваториальная Гвинея",
+    "dialCode": "+240"
+}, {
+    "code": "er",
+    "text": "Эритрея",
+    "dialCode": "+291"
+}, {
+    "code": "ee",
+    "text": "Эстония",
+    "dialCode": "+372"
+}, {
+    "code": "et",
+    "text": "Эфиопия",
+    "dialCode": "+251"
+}, {
+    "code": "za",
+    "text": "ЮАР",
+    "dialCode": "+27"
+}, {
+    "code": "kr",
+    "text": "Республика Корея",
+    "dialCode": "+82"
+}, {
+    "code": "gs",
+    "text": "Южная Георгия и Южные Сандвичевы острова",
+    "dialCode": "+500"
+}, {
+    "code": "jm",
+    "text": "Ямайка",
+    "dialCode": "+1876"
+}, {
+    "code": "jp",
+    "text": "Япония",
+    "dialCode": "+81"
+}, {
+    "code": "nf",
+    "text": "Остров Норфолк",
+    "dialCode": "+672"
+}, {
+    "code": "sh",
+    "text": "Остров Святой Елены",
+    "dialCode": "+290"
+}, {
+    "code": "tc",
+    "text": "Тёркс и Кайкос",
+    "dialCode": "+1649"
+}, {
+    "code": "wf",
+    "text": "Уоллис и Футуна",
+    "dialCode": "+681"
+}]

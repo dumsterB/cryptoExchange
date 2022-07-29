@@ -1,0 +1,23 @@
+.wrap {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 485px;
+    z-index: 980;
+}
+
+@include max1200 {
+    .wrap {
+        max-width: 385px;
+    }
+}
+
+@include max767 {
+    .wrap {
+        max-width: calc(100% - 32px);
+    }
+}

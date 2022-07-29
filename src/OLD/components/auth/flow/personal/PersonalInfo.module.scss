@@ -1,0 +1,5 @@
+.input {
+    & + .input {
+        margin-top: 16px;
+    }
+}
