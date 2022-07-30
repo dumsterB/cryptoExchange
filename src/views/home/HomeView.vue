@@ -10,7 +10,7 @@ import TabsItem from './components/Tabs/Item/TabsItem.vue';
 import { TransactionsBlock } from '@/components/Transaction';
 import { useI18n } from 'vue-i18n';
 import { usePopup } from '@/hooks/usePopup';
-import { usePortfolioTokens } from './api/tokens';
+import { usePortfolioTokens } from '@/states/portfolio/hooks/useTokens';
 
 const { tokens, isLoading } = usePortfolioTokens();
 

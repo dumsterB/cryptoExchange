@@ -4,8 +4,8 @@ import { RelativeChange } from '@/uikit';
 import { CurrencyNumber, SafeShow } from '@/components/Currency';
 import { formatCurrency } from '@/utils/currency';
 import { useI18n } from 'vue-i18n';
-import { useCurrencyStore } from '@/stores/currency';
-import { usePortfolioStore } from '@/stores/portfolio';
+import { useCurrencyStore } from '@/states/currency/store';
+import { usePortfolioStore } from '@/states/portfolio/store';
 
 const { t, locale } = useI18n(); 
 const styles = useCssModule('styles');

@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, watch } from 'vue';
-import { useCurrencyStore } from '@/stores/currency';
+import { useCurrencyStore } from '@/states/currency/store';
 import { storeToRefs } from 'pinia';
 
 export function useSocketSub({
