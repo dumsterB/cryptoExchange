@@ -37,6 +37,18 @@
     }
 }
 
+.tokens {
+    position: relative;
+    min-height: 240px;
+    
+    &Spin {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
 .balanceControl {
     display: flex;
     align-items: center;

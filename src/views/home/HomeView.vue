@@ -1,47 +1,44 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
-
-import AppPopup from '@/components/popup/AppPopup.vue';
-import CoinPreview from '@/components/asset/preview/CoinPreview.vue';
-import HomeAction from '@/components/home/action/HomeAction.vue';
-import HomeBalance from '@/components/home/balance/HomeBalance.vue';
-import TabsBlock from '@/components/home/tabs/block/TabsBlock.vue';
-import TabsItem from '@/components/home/tabs/item/TabsItem.vue';
-import VIcon from '@/components/common/icon/VIcon.vue';
-import VSwitch from '@/components/common/switch/VSwitch.vue';
-import TransactionsBlock from '@/components/asset/transaction/block/TransactionsBlock.vue';
-
+import { AppPopup, AppPopupHead, AppPopupBody } from '@/components/Popup';
+import { VIcon, VSpin, VSwitch } from '@/uikit';
+import TokenPreview from './components/Token/TokenPreview.vue';
+import HomeAction from './components/Action/HomeAction.vue';
+import HomeBalance from './components/Balance/HomeBalance.vue';
+import TabsBlock from './components/Tabs/Block/TabsBlock.vue';
+import TabsItem from './components/Tabs/Item/TabsItem.vue';
+import { TransactionsBlock } from '@/components/Transaction';
 import { useI18n } from 'vue-i18n';
-import { usePopup } from '@/composables/popup/usePopup';
-import { useRealtimePortfolioAssetsUpdate, useRealtimePortfolioTransactionsUpdate } from '@/services/api/realtime/portfolio';
+import { usePopup } from '@/hooks/usePopup';
+import { usePortfolioTokens } from './api/tokens';
+
+const { tokens, isLoading } = usePortfolioTokens();
+
+const filteredTokens = computed(() => hideSmallBalances.value
+    ? tokens.value.filter(({ value }) => value > 0)
+    : tokens.value
+);
+
+// TODO: real txs
+const transactions = [];
 
 const { t } = useI18n();
-
-const TAB_ASSETS_TYPE = 'assets';
-const TAB_HISTORY_TYPE = 'history';
-
-const hideSmallBalances = ref(false);
-
-const [ assets ] = useRealtimePortfolioAssetsUpdate();
-const [ transactions ] = useRealtimePortfolioTransactionsUpdate();
-
-const filteredAssets = computed(() => {
-    return hideSmallBalances.value
-        ? assets.value.filter(({ value }) => value > 0)
-        : assets.value;
-});
-
 const {
     isPopupOpen,
     openPopup,
     closePopup
 } = usePopup();
 
+const hideSmallBalances = ref(false);
+
 watch(hideSmallBalances, () => {
     if (isPopupOpen.value) {
         closePopup();
     }
 });
+
+const TAB_TOKENS_TYPE = 'tokens';
+const TAB_HISTORY_TYPE = 'history';
 </script>
 
 <template>
@@ -50,9 +47,8 @@ watch(hideSmallBalances, () => {
     <div :class="styles.actions">
         <div :class="styles.actionsWrap">
             <div :class="styles.actionsList">
-                <!-- TODO: real url -->
                 <HomeAction
-                    to="/"
+                    to="/order-card"
                     icon="card"
                 >
                     {{ t('orderCryptoCard') }}
@@ -84,7 +80,7 @@ watch(hideSmallBalances, () => {
 
     <TabsBlock :class="styles.tabs">
         <template #head="{ activeTab }">
-            <template v-if="activeTab === TAB_ASSETS_TYPE">
+            <template v-if="activeTab === TAB_TOKENS_TYPE">
                 <div :class="styles.balanceControl">
                     <div :class="styles.balanceControlText">
                         {{ t('hideSmallBalances') }}
@@ -103,52 +99,71 @@ watch(hideSmallBalances, () => {
                     </div>
                 </div>
 
-                <AppPopup
-                    v-model="isPopupOpen"
-                    title="actions"
-                >
-                    <div :class="styles.popupAction">
-                        <div :class="styles.popupActionText">
-                            {{ t('hideSmallBalances') }}
-                        </div>
+                <AppPopup v-model="isPopupOpen">
+                    <AppPopupHead>
+                        {{ t('actions') }}
+                    </AppPopupHead>
 
-                        <VSwitch
-                            v-model:checked="hideSmallBalances"
-                            :class="styles.popupActionSwitch"
-                        />
-                    </div>
+                    <AppPopupBody>
+                        <div :class="styles.popupAction">
+                            <div :class="styles.popupActionText">
+                                {{ t('hideSmallBalances') }}
+                            </div>
+
+                            <VSwitch
+                                v-model:checked="hideSmallBalances"
+                                :class="styles.popupActionSwitch"
+                            />
+                        </div>
+                    </AppPopupBody>
                 </AppPopup>
             </template>
         </template>
 
         <template #body>
             <TabsItem
-                :type="TAB_ASSETS_TYPE"
+                :type="TAB_TOKENS_TYPE"
                 title="assets"
             >
-                <div :class="styles.tableCols">
-                    <div :class="styles.col">
-                        {{ t('asset') }}
-                    </div>
+                <div :class="styles.tokens">
+                    <VSpin
+                        v-if="isLoading"
+                        :class="styles.tokensSpin"
+                    />
+                    
+                    <template v-else>
+                        <div :class="styles.tableCols">
+                            <div :class="styles.col">
+                                {{ t('asset') }}
+                            </div>
 
-                    <div :class="styles.col">
-                        {{ t('price') }}
-                    </div>
+                            <div :class="styles.col">
+                                {{ t('price') }}
+                            </div>
 
-                    <div :class="styles.col">
-                        {{ t('quantity') }}
-                    </div>
+                            <div :class="styles.col">
+                                {{ t('quantity') }}
+                            </div>
 
-                    <div :class="styles.col">
-                        {{ t('cost') }}
-                    </div>
+                            <div :class="styles.col">
+                                {{ t('cost') }}
+                            </div>
+                        </div>
+
+                        <TokenPreview
+                            v-for="({ id, chain, symbol, value, decimals, price, standard, iconUrl }) in filteredTokens"
+                            :id="id"
+                            :key="id"
+                            :chain="chain"
+                            :symbol="symbol"
+                            :value="value"
+                            :decimals="decimals"
+                            :price="price"
+                            :standard="standard"
+                            :icon-url="iconUrl"
+                        />
+                    </template>
                 </div>
-
-                <CoinPreview
-                    v-for="asset in filteredAssets"
-                    :key="asset.id"
-                    v-bind="asset"
-                />
             </TabsItem>
 
             <TabsItem

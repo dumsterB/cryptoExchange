@@ -1,0 +1,1 @@
+export { default as TokenIcon } from './Icon/TokenIcon';

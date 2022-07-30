@@ -12,28 +12,4 @@
     flex-shrink: 0;
     position: relative;
     transform: translateZ(0);
-
-    &.l {
-        width: 44px;
-        height: 44px;
-    }
-
-    &.m {
-        width: 24px;
-        height: 24px;
-    }
-
-    &.s {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-@include max767 {
-    .icon {
-        &.l {
-            width: 40px;
-            height: 40px;
-        }
-    }
 }
