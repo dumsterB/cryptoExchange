@@ -1,0 +1,149 @@
+@mixin min1201 {
+    @media (min-width: 1201px) {
+        @content;
+    }
+}
+
+@mixin min1001 {
+    @media (min-width: 1001px) {
+        @content;
+    }
+}
+
+@mixin min768 {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin max1400 {
+    @media (max-width: 1400px) {
+        @content;
+    }
+}
+
+@mixin max1200 {
+    @media (max-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin max1000 {
+    @media (max-width: 1000px) {
+        @content;
+    }
+}
+
+// @mixin max1025 {
+//     @media (max-width: 1025px) {
+//         @content;
+//     }
+// }
+
+@mixin max767 {
+    @media (max-width: 767px) {
+        @content;
+    }
+}
+
+@mixin max360 {
+    @media (max-width: 360px) {
+        @content;
+    }
+}
+
+// @mixin _1400 {
+//     @media (max-width: 1400px) {
+//         @content;
+//     }
+// }
+
+// @mixin _1200 {
+//     @media (max-width: 1200px) {
+//         @content;
+//     }
+// }
+
+// @mixin _1000 {
+//     @media (max-width: 1000px) {
+//         @content;
+//     }
+// }
+
+// @mixin _767 {
+//     @media (max-width: 767px) {
+//         @content;
+//     }
+// }
+
+// @mixin _700 {
+//     @media (max-width: 700px) {
+//         @content;
+//     }
+// }
+
+// @mixin _600 {
+//     @media (max-width: 600px) {
+//         @content;
+//     }
+// }
+
+// @mixin _500 {
+//     @media (max-width: 500px) {
+//         @content;
+//     }
+// }
+
+// @mixin _400 {
+//     @media (max-width: 400px) {
+//         @content;
+//     }
+// }
+
+// @mixin _350 {
+//     @media (max-width: 350px) {
+//         @content;
+//     }
+// }
+
+// @mixin maxWidth($screen) {
+//     @media (max-width: $screen+'px') {
+//         @content;
+//     }
+// }
+
+// @mixin minWidth($width) {
+//     @media (min-width: $width+'px') {
+//         @content;
+//     }
+// }
+
+// @mixin minMaxWidth($minWidth, $maxWidth) {
+//     @media (min-width: $minWidth+'px') and (max-width: $maxWidth+'px') {
+//         @content;
+//     }
+// }
+
+// @mixin maxHeight($height) {
+//     @media (max-height: $height) {
+//         @content;
+//     }
+// }
+
+// @mixin minHeight($height) {
+//     @media (min-height: $height) {
+//         @content;
+//     }
+// }
+
+@mixin retina2x() {
+    @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+        @content;
+    }
+}
+
+@mixin retina3x() {
+    @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+        @content;
+    }
+}
