@@ -5,7 +5,7 @@ import { VIcon } from '@/uikit';
 import CurrencyIcon from '../Icon/CurrencyIcon';
 import CurrencySwitcherItem from './Item/CurrencySwitcherItem.vue';
 import { useClickOutside } from '@/hooks/useClickOutside';
-import { currencies, useCurrencyStore } from '@/stores/currency';
+import { currencies, useCurrencyStore } from '@/states/currency/store';
 
 const props = defineProps({
     popupOpen: Boolean

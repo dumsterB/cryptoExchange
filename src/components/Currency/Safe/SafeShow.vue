@@ -1,7 +1,7 @@
 <script setup>
 import { h, nextTick, ref, useSlots, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useBalanceStore } from '@/stores/balance';
+import { useBalanceStore } from '@/states/balance/store';
 import { createBlurSvg } from './utils';
 
 // TODO: render function component

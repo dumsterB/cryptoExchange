@@ -151,5 +151,5 @@ const network = computed(() => {
 </template>
 
 <style lang="scss" module="styles">
-@import './CoinPreview.module.scss';
+@import './TokenPreview.module.scss';
 </style>

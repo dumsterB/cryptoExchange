@@ -14,11 +14,6 @@ import { usePortfolioTokens } from './api/tokens';
 
 const { tokens, isLoading } = usePortfolioTokens();
 
-const filteredTokens = computed(() => hideSmallBalances.value
-    ? tokens.value.filter(({ value }) => value > 0)
-    : tokens.value
-);
-
 // TODO: real txs
 const transactions = [];
 
@@ -30,6 +25,11 @@ const {
 } = usePopup();
 
 const hideSmallBalances = ref(false);
+
+const filteredTokens = computed(() => hideSmallBalances.value
+    ? tokens.value.filter(({ value }) => value > 0)
+    : tokens.value
+);
 
 watch(hideSmallBalances, () => {
     if (isPopupOpen.value) {

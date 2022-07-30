@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 
 export const currencies = {
     rub: {
+        id: 'ruble',
         almostZero: '~0,00 ₽',
         code: 'rub',
         locale: 'ru',
@@ -11,6 +12,7 @@ export const currencies = {
         image: '/images/fiat/rub.png',
     },
     eur: {
+        id: 'euro',
         almostZero: '~0,00 €',
         code: 'eur',
         locale: 'de-DE',
@@ -29,6 +31,7 @@ export const currencies = {
         // }
     },
     usd: {
+        id: 'dollar',
         almostZero: '~$0.00',
         code: 'usd',
         locale: 'en-US',
@@ -57,6 +60,9 @@ export const useCurrencyStore = defineStore('currency', {
     getters: {
         currency() {
             return currencies[this.code];
+        },
+        id() {
+            return this.currency.id;
         }
     }
 });

@@ -1,8 +1,11 @@
-import { CurrencyIcon } from "../../Currency";
+import { CurrencyIcon } from '../../Currency';
 import styles from './TokenIcon.module.scss';
 
 function TokenIcon({ image, size }) {
-    return <CurrencyIcon image={image} class={ styles[size] } />;
+    return <CurrencyIcon
+        image={image}
+        class={ styles[size]}
+    />;
 }
 
 TokenIcon.props = {
