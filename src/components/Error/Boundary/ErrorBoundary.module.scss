@@ -1,0 +1,86 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 20px 0 140px 0;
+}
+
+.wrap {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding-top: 350px;
+}
+
+.image {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 496px;
+    height: 433px;
+    background-image: url('/images/unknown-error.png');
+    background-size: 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.title {
+    color: var(--color-typo-base);
+    font-weight: 400;
+    font-size: 68px;
+    line-height: 1.1;
+    text-align: center;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-size: 22px;
+    color: var(--color-typo-ghost);
+    line-height: 1.2;
+    text-align: center;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+}
+
+@include max1200 {
+    .title {
+        font-size: 52px;
+    }
+
+    .description {
+        font-size: 20px;
+    }
+}
+
+@include max767 {
+    .container {
+        padding: 0 0 100px 0;
+    }
+
+    .wrap {
+        padding-top: 260px;
+    }
+
+    .image {
+        top: -50px;
+        width: 350px;
+        height: 306px;
+    }
+
+    .title {
+        font-size: 32px;
+        margin-bottom: 16px;
+    }
+    
+    .description {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+}
