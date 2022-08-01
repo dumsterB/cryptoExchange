@@ -1,9 +1,10 @@
 <script setup>
 import { computed, onUnmounted, ref, useAttrs, useCssModule, watchEffect } from 'vue';
-import { AppPopup } from '@/components/Popup';
+import { AppPopup, AppPopupHead } from '@/components/Popup';
 import { VIcon } from '@/uikit';
 import CurrencyIcon from '../Icon/CurrencyIcon';
 import CurrencySwitcherItem from './Item/CurrencySwitcherItem.vue';
+import { useI18n } from 'vue-i18n';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { currencies, useCurrencyStore } from '@/states/currency/store';
 
@@ -11,8 +12,9 @@ const props = defineProps({
     popupOpen: Boolean
 });
  
-const styles = useCssModule('styles');
+const { t } = useI18n();
 const attrs = useAttrs();
+const styles = useCssModule('styles');
 const currencyStore = useCurrencyStore();
 
 const wrap = ref(null);
@@ -111,15 +113,21 @@ const buttonClass = computed(() => {
             v-if="popupOpen"
             v-model="isPopupOpen"
         >
-            <CurrencySwitcherItem
-                v-for="({ code, name, symbol, image }) in currencies"
-                :key="code"
-                :code="code"
-                :name="name"
-                :symbol="symbol"
-                :image="image"
-                @click="changeCurrency"
-            />
+            <AppPopupHead>
+                {{ t('currency.label') }}
+            </AppPopupHead>
+
+            <div :class="styles.popupList">
+                <CurrencySwitcherItem
+                    v-for="({ code, name, symbol, image }) in currencies"
+                    :key="code"
+                    :code="code"
+                    :name="name"
+                    :symbol="symbol"
+                    :image="image"
+                    @click="changeCurrency"
+                />
+            </div>
         </AppPopup>
 
     </div>

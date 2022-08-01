@@ -1,0 +1,20 @@
+.status {
+    display: inline-flex;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+    user-select: none;
+    border-radius: 68px;
+
+    &.green {
+        color: var(--color-success);
+        background-color: var(--color-bg-success);
+    }
+
+    &.orange {
+        color: var(--color-warning);
+        background-color: var(--color-bg-warning);
+    }
+}

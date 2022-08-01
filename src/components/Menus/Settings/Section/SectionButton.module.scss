@@ -1,0 +1,123 @@
+.button {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    background-color: var(--color-surface);
+    height: 92px;
+    padding: 16px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 12px;
+
+    &Top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &Icon {
+        display: flex;
+        color: var(--color-typo-ghost);
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    &Arrow {
+        display: flex;
+        color: var(--color-typo-ghost);
+    }
+
+    &Text {
+        color: var(--color-typo-base);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    @include hover {
+        &:hover {
+            background-color: var(--color-bg-soft);
+        }
+
+        &:hover &Icon,
+        &:hover &Arrow  {
+            color: var(--color-typo-base);
+        }
+    }
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon {
+    display: flex;
+    color: var(--color-typo-ghost);
+
+    img,
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.arrow {
+    display: flex;
+    color: var(--color-typo-ghost);
+}
+
+.text {
+    color: var(--color-typo-base);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@include hover {
+    .button {
+        &:hover {
+            background-color: var(--color-bg-soft);
+        }
+
+        &:hover &Icon,
+        &:hover &Arrow  {
+            color: var(--color-typo-base);
+        }
+    }
+}
+
+@include max767 {
+    .button {
+        position: relative;
+        height: 60px;
+        flex-flow: row;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: transparent;
+        padding: 0 20px 0 0;
+        border-radius: 0;
+    }
+
+    .top {
+        flex-shrink: 0;
+        margin-right: 16px;
+    }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%);
+    }
+}

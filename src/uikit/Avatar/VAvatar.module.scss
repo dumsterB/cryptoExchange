@@ -1,0 +1,14 @@
+.avatar {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+    box-sizing: border-box;
+    border-radius: 8px;
+    flex-shrink: 0;
+    position: relative;
+    transform: translateZ(0);
+}

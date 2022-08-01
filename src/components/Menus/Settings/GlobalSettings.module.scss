@@ -1,0 +1,25 @@
+.settings {
+    width: 330px;
+}
+
+.head {
+    margin-bottom: 22px;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+@include max1200 {
+    .settings {
+        width: 100%;
+    }
+}
+
+@include max767 {
+    .list {
+        grid-template-columns: 1fr;
+    }
+}

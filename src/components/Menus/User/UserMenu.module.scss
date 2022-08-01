@@ -1,0 +1,118 @@
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    
+    &.button {
+        background-color: transparent;
+        border: 0;
+        border-radius: 12px;
+        outline: 0;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+        cursor: pointer;
+        touch-action: manipulation;
+        user-select: none;
+        white-space: nowrap;
+        -moz-user-focus: ignore;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+        @include hover {
+            &:hover {
+                background-color: var(--color-surface);
+            }
+        }
+    
+        &.active {
+            background-color: var(--color-surface);
+        }
+    }
+
+    &Content {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        margin-right: 4px;
+    }
+
+    &Avatar {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        border-radius: 8px;
+    }
+
+    &Details {
+        flex: 1;
+        min-width: 0;
+        margin-left: 12px;
+    }
+
+    &Arrow {
+        flex-shrink: 0;
+        padding: 0 8px;
+        will-change: transform;
+        transition: transform 0.15s;
+    }
+
+    &.opened &Arrow {
+        transform: scaleY(-1) translate(0, 3px);
+    }
+
+    &Dots {
+        display: flex;
+        flex-shrink: 0;
+    }
+
+    &Name {
+        font-size: 14px;
+        color: var(--color-typo-base);
+        line-height: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 8px;
+        white-space: nowrap;
+    }
+}
+
+.menu {
+    width: 284px;
+    margin: -8px;
+
+    &Link,
+    &Logout {
+        font-size: 16px !important;
+    }
+
+    &Link {
+        color: var(--color-typo-base) !important;
+    }
+
+    &Logout {
+         color: var(--color-danger) !important;
+    }
+
+    .user {
+        margin-bottom: 22px;
+
+        &Content {
+            margin-right: 0;
+        }
+    }
+}
+
+@include max1200 {
+    .menu {
+        width: 100%;
+        margin: 0;
+
+        &Links {
+            margin: 0 -18px;
+        }
+    }
+}

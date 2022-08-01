@@ -71,3 +71,9 @@
     box-shadow: 0px 16px 40px var(--shadow-light-color);
     border-radius: 16px;
 }
+
+.popupList {
+    display: flex;
+    flex-flow: column;
+    margin: 0 -8px;
+}
