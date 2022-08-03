@@ -1,18 +1,4 @@
-import { h } from 'vue';
-import styles from './FlagIcon.module.scss';
-
-function FlagIcon({ code }, { attrs }) {
-    const style = { backgroundImage: `url(/images/flags/${ code }.svg)` };
-
-    return h(
-        'div',
-        {
-            ...attrs,
-            style,
-            class: styles.flag
-        }
-    );
-}
+import styles from './VFlagIcon.module.scss';
 
 FlagIcon.props = {
     code: {
@@ -20,5 +6,15 @@ FlagIcon.props = {
         required: true
     }
 };
+
+function FlagIcon({ code }, { attrs }) {
+    const style = { backgroundImage: `url(/images/flags/${ code }.svg)` };
+
+    return <div
+        class={[styles.flag, attrs.class]}
+        style={style}
+    >
+    </div>;
+}
 
 export default FlagIcon;
