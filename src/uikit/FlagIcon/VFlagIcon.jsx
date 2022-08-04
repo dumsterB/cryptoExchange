@@ -1,12 +1,5 @@
 import styles from './VFlagIcon.module.scss';
 
-FlagIcon.props = {
-    code: {
-        type: String,
-        required: true
-    }
-};
-
 function FlagIcon({ code }, { attrs }) {
     const style = { backgroundImage: `url(/images/flags/${code}.svg)` };
 
@@ -16,5 +9,12 @@ function FlagIcon({ code }, { attrs }) {
     >
     </div>;
 }
+
+FlagIcon.props = {
+    code: {
+        type: String,
+        required: true
+    }
+};
 
 export default FlagIcon;

@@ -1,6 +1,12 @@
 import { apiClient } from '@/app/api/client';
+import { MOCK_API_CALLS } from '@/config';
 
 export async function startRegister({ email: login, phone, password, passwordConfirm }, refCode = null) {
+    if (MOCK_API_CALLS)
+        return {
+            waitListID: Date.now()
+        };
+
     const payload = {
         login,
         phone,
@@ -21,6 +27,9 @@ export async function startRegister({ email: login, phone, password, passwordCon
 }
 
 export async function sendEmailOtp(waitListID) {
+    if (MOCK_API_CALLS)
+        return {};
+
     return apiClient.post(
         '/waitlist/send',
         { waitListID }
@@ -28,6 +37,11 @@ export async function sendEmailOtp(waitListID) {
 }
 
 export async function submitEmailOtp(waitListID, code) {
+    if (MOCK_API_CALLS)
+        return {
+            waitListID
+        };
+
     const { message: { ID, ...result } } = await apiClient.post(
         '/waitlist/accept',
         { waitListID, code }
@@ -40,6 +54,9 @@ export async function submitEmailOtp(waitListID, code) {
 }
 
 export async function sendPhoneOtp(waitListID) {
+    if (MOCK_API_CALLS)
+        return {};
+    
     return apiClient.post(
         '/waitlist/send',
         { waitListID }
@@ -47,6 +64,11 @@ export async function sendPhoneOtp(waitListID) {
 }
 
 export async function submitPhoneOtp(waitListID, code) {
+    if (MOCK_API_CALLS)
+        return {
+            waitListID
+        };
+
     const { message: { ID, ...result } } = await apiClient.post(
         '/waitlist/accept',
         { waitListID, code }
@@ -59,6 +81,13 @@ export async function submitPhoneOtp(waitListID, code) {
 }
 
 export async function sendPersonalInfo(waitListID, { name, surname, country }) {
+    if (MOCK_API_CALLS)
+        return {
+            waitListID,
+            accessToken: 'mocked_access_token',
+            refreshToken: 'mocked_refresh_token'
+        };
+
     const { message: { ID, ...result } } = await apiClient.post(
         '/waitlist/accept',
         { waitListID, firstName: name, lastName: surname, countryCode: country }
