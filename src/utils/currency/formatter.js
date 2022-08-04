@@ -1,4 +1,4 @@
-import { currencies } from '@/stores/currency';
+import { currencies } from '@/states/currency/store';
 
 export function getFormatter(
     locale,

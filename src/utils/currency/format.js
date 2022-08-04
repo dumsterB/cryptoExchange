@@ -1,4 +1,4 @@
-import { currencies } from '@/stores/currency';
+import { currencies } from '@/states/currency/store';
 import { getFormatter } from './formatter';
 
 export function formatCurrency(value, locale, currencyCode) {
