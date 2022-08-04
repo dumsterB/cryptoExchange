@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { systemLogout, handleRefresh, AccessToken } from '@/utils/auth';
+import { systemLogout } from '@/states/user/services/logout';
+import { AccessToken, handleRefreshCredentials } from '@/utils/auth';
 import { BASE_URL } from '@/config';
 
 const axiosInstance = axios.create({
@@ -33,7 +34,7 @@ axiosInstance.interceptors.response.use(
         if (error?.response?.status === 401 && !originalConfig._retry) {
             originalConfig._retry = true;
             
-            const { error: refreshFailed } = await handleRefresh();
+            const { error: refreshFailed } = await handleRefreshCredentials();
 
             if (refreshFailed) {
                 // if refresh was failed
@@ -50,12 +51,16 @@ axiosInstance.interceptors.response.use(
     }
 );
 
-function post(url, body, config = {}) {
-    return axiosInstance.post(url, body, config);
+async function post(url, body, config = {}) {
+    const { data } = await axiosInstance.post(url, body, config);
+
+    return data;
 }
 
-function get(url) {
-    return axiosInstance.get(url);
+async function get(url) {
+    const { data } = await axiosInstance.get(url);
+
+    return data;
 }
 
 export default {
