@@ -2,13 +2,15 @@ import { nextTick } from 'vue';
 import { createI18n } from 'vue-i18n';
 import { getLanguageCodeFromLS } from './helpers';
 import ru from './locales/ru';
+import en from './locales/en';
 
 // TODO: async load messages
 const i18n = createI18n({
     legacy: false,
     locale: getLanguageCodeFromLS(),
     messages: {
-        ru
+        ru,
+        en
     },
     pluralizationRules: {
         'ru': (choice, choicesLength) => {
