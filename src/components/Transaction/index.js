@@ -1,0 +1,1 @@
+export { default as TransactionsBlock } from './block/TransactionsBlock.vue';
