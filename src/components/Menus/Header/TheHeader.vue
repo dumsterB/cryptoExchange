@@ -29,9 +29,10 @@ const userStore = useUserStore();
 let addonComponent = null;
 
 if (route.meta.headerMobileAddon) {
-    addonComponent = defineAsyncComponent(
-        () => import(route.meta.headerMobileAddon)
-    );   
+    // TODO: check
+    // addonComponent = defineAsyncComponent(
+    //     () => import(route.meta.headerMobileAddon)
+    // );   
 }
 
 const headerClasses = computed(() => [
@@ -53,7 +54,7 @@ const settingsButton = ref(null);
 
 // balance show
 const balanceStore = useBalanceStore();
-const balanceButtonIcon = computed(() => balanceStore.hideBalances ? 'eye' : 'eye-off');
+const balanceButtonIcon = computed(() => balanceStore.hideBalances ? 'eye-off' : 'eye');
 
 const handleBalanceButtonClick = () => {
     balanceStore.hideBalances = !balanceStore.hideBalances;

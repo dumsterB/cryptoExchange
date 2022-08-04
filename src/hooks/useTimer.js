@@ -10,7 +10,10 @@ export function useTimer(secondsInterval) {
     const timer = ref(0);
     const secondsIntervalMs = unref(secondsInterval) * MS_IN_SECOND;
 
-    const startTimer = (onStart = null, onEnd = null) => {
+    const startTimer = ({
+        onStart = null,
+        onEnd = null
+    }) => {
         onStart?.();
 
         timer.value = secondsInterval;

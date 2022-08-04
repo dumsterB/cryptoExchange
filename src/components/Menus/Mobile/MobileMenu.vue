@@ -45,7 +45,7 @@ watchEffect(() => {
     }
 });
 
-onUnmounted(() => enableBodyScroll(menu.value));
+onUnmounted(() => menu.value && enableBodyScroll(menu.value));
 
 const handleSettingButtonClick = () => emit('open-settings');
 </script>

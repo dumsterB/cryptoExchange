@@ -5,7 +5,7 @@ import { TokenIcon } from '@/components/Token';
 import { formatCurrency } from '@/utils/currency';
 import { formatTokenQuantity } from '@/utils/token';
 import { useI18n } from 'vue-i18n';
-import { useCurrencyStore } from '@/2v/entities/currency/store/currency';
+import { useCurrencyStore } from '@/states/currency/store';
 
 const props = defineProps({
     id: {

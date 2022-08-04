@@ -4,6 +4,7 @@ import { VAvatar, VIcon } from '@/uikit';
 import { AppPopup, AppPopupHead } from '@/components/Popup';
 import { VerificationStatus } from '@/components/User';
 import MenuLink from '../Link/MenuLink.vue';
+import { logout } from '@/states/user/services/logout';
 import { useI18n } from 'vue-i18n';
 import { usePopup } from '@/hooks/usePopup.js';
 import { useUserStore } from '@/states/user/store';
@@ -38,7 +39,7 @@ const links = userLinks(
 );
 
 // TODO: real logout
-const handleLogout = () => console.log('logout');
+const handleLogout = () => logout();
 </script>
 
 <template>
