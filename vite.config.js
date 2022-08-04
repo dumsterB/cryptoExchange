@@ -1,13 +1,14 @@
-import { fileURLToPath, URL } from 'url'
-
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import svgLoader from 'vite-svg-loader'
+import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import svgLoader from 'vite-svg-loader';
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
         vue(),
+        vueJsx(),
         svgLoader({
             svgo: false
         })
@@ -15,8 +16,10 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
-            '@icons': fileURLToPath(new URL('./src/assets/icons', import.meta.url))
         }
+    },
+    server: {
+        port: 3000
     },
     css: {
         modules: {
@@ -24,11 +27,12 @@ export default defineConfig({
         },
         preprocessorOptions: {
             scss: {
-                additionalData: `@import '@/assets/scss/abstracts/abstracts.scss';`
+                // eslint-disable-next-line quotes
+                additionalData: `@import '@/app/assets/scss/abstracts/abstracts.scss';`
             }
         }
     }
-})
+});
 
 
 // Version with index.html transform

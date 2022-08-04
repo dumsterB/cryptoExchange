@@ -1,9 +1,10 @@
 {
     "compilerOptions": {
         "baseUrl": "./",
+        "module": "es6",
+        "moduleResolution": "node",
         "paths": {
             "@/*": ["./src/*"],
-            "@icons/*": ["./src/assets/icons/*"]
         },
         "jsx": "preserve"
     },
