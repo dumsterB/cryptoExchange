@@ -8,12 +8,12 @@ const props = defineProps({
     }
 });
 
-const icons = import.meta.globEager('../../assets/icons/*.svg');
+const icons = import.meta.globEager('../../app/assets/icons/*.svg');
 
 const svg = ref();
 
 watchEffect(() => {
-    svg.value = icons[`../../app/icons/${ props.name }.svg`];
+    svg.value = icons[`../../app/assets/icons/${ props.name }.svg`];
 });
 </script>
 
