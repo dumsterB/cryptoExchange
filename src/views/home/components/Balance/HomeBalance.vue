@@ -1,6 +1,6 @@
 <script setup>
 import { computed, useCssModule } from 'vue';
-import { RelativeChange } from '@/uikit';
+import { VRelativeChange } from '@/uikit';
 import { CurrencyNumber, SafeShow } from '@/components/Currency';
 import { formatCurrency } from '@/utils/currency';
 import { useI18n } from 'vue-i18n';
@@ -45,7 +45,7 @@ const amountChangeClasses = computed(() => {
             v-if="portfolioStore.absoluteChange24h !== 0"
             :class="styles.dynamics"
         >
-            <RelativeChange :value="portfolioStore.relativeChange24h" />
+            <VRelativeChange :value="portfolioStore.relativeChange24h" />
 
             <div :class="amountChangeClasses">
                 {{ amountChange }}
