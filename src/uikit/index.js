@@ -7,6 +7,7 @@ export { default as VInput } from './Input/VInput.vue';
 export { default as VPasswordInput } from './PasswordInput/VPasswordInput.vue';
 export { default as VSpin } from './Spin/VSpin.vue';
 export { default as VSwitch } from './Switch/VSwitch.vue';
+export { default as VTooltip } from './Tooltip/VTooltip';
 export { default as VIcon } from './Icon/VIcon';
 export { default as VIconButton } from './IconButton/IconButton';
 export { default as VFlagIcon } from './FlagIcon/VFlagIcon';
