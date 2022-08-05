@@ -10,6 +10,7 @@ export { default as VSwitch } from './Switch/VSwitch.vue';
 export { default as VIcon } from './Icon/VIcon';
 export { default as VIconButton } from './IconButton/IconButton';
 export { default as VFlagIcon } from './FlagIcon/VFlagIcon';
-export { default as VCodeField } from './VCodeField/VCodeField.vue';
+export { default as VCodeField } from './CodeField/VCodeField.vue';
 export { default as EmptyPlaceholder } from './EmptyPlaceholder/EmptyPlaceholder.vue';
 export { default as VRelativeChange } from './RelativeChange/VRelativeChange';
+export { default as VSkeletonLoader } from './Skeleton/VSkeletonLoader';
