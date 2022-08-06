@@ -24,3 +24,9 @@
         pointer-events: none;
     }
 }
+
+@include max767 {
+    .button {
+        font-size: 14px;
+    }
+}

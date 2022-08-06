@@ -1,0 +1,130 @@
+
+.wrap {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    margin-bottom: 30px;
+}
+
+.asset {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.qrCode {
+    display: flex;
+    margin: 0 auto 30px auto;
+}
+
+.address {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    margin-bottom: 30px;
+
+    &Label {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1;
+        text-align: center;
+        margin-bottom: 16px;
+    }
+
+    &Value {
+        background-color: var(--color-surface);
+        padding: 14px;
+        overflow: hidden;
+        border-radius: 12px;
+        text-align: center;
+        word-break: break-all;
+    }
+
+    &Text {
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 18px;
+        margin-right: 8px;
+    }
+
+    &Copy {
+        vertical-align: bottom;
+        display: inline-block;
+        align-items: center;
+        color: var(--color-typo-base);
+        line-height: 18px;
+    }
+}
+
+.alert {
+    width: 100%;
+}
+
+.warning {
+    & + .warning {
+        margin-top: 8px;
+    }
+
+    span {
+        color: var(--color-danger);
+    }
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 410px;
+}
+
+@include max1000 {
+    .address {
+        &Value {
+            cursor: default;
+        }
+    }
+}
+
+@include max767 {
+    .asset {
+        font-size: 16px;
+    }
+
+    .address {
+        &Label {
+            font-size: 14px;
+        }
+
+        &Value {
+            padding: 16px;
+        }
+
+        &Text {
+            font-size: 12px;
+            line-height: 14px;
+            margin-right: 4px;
+        }
+
+        &Copy {
+            svg {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+
+    .warning {
+        font-size: 12px;
+
+        & + .warning {
+            margin-top: 6px;
+        }
+    }
+}

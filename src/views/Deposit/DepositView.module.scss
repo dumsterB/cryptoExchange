@@ -1,0 +1,14 @@
+.wrap {
+    padding: 20px 0 60px 0;
+}
+
+.content {
+    min-width: 0;
+    flex: auto;
+    display: flex;
+    flex-flow: column;
+}
+
+.toggleButtons {
+    margin-bottom: 30px;
+}

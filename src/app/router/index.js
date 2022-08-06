@@ -94,6 +94,25 @@ const router = createRouter({
         //     },
         //     component: () => import('../2v/views/affiliate/AffiliateView.vue')
         // },
+        {
+            path: '/deposit',
+            name: 'deposit',
+            meta: {
+                layout: defaultLayout
+            },
+            component: () => import('../../views/Deposit/DepositView.vue'),
+            redirect: () => '/deposit/fiat',
+            children: [
+                {
+                    path: '/deposit/token',
+                    component: () => import('../../views/Deposit/Token/DepositTokenView.vue')
+                },
+                {
+                    path: '/deposit/fiat',
+                    component: () => import('../../views/Deposit/Fiat/DepositFiatView.vue')
+                }
+            ]
+        }
     ]
 });
 
