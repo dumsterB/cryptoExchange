@@ -142,15 +142,26 @@ const shortAddress = computed(() => props.loading
             </div>
         </div>
 
-        <div :class="styles.actions">
+        <div
+            v-if="loading"
+            :class="styles.actions"
+        >
+            <div
+                v-for="i in 3"
+                :key="i"
+                :class="styles.action"
+            >
+                <VSkeletonLoader :class="styles.actionSkeleton" />
+            </div>
+        </div>
+
+        <div
+            v-else
+            :class="styles.actions"
+        >
             <!-- TODO: real url -->
             <div :class="styles.action">
-                <VSkeletonLoader
-                    v-if="loading"
-                    :class="styles.actionSkeleton"
-                />
                 <RouterLink
-                    v-else
                     :to="{path: '/swap', query: { output: props.id }}"
                     :class="styles.actionWrap"
                 >
@@ -165,12 +176,7 @@ const shortAddress = computed(() => props.loading
             </div>
 
             <div :class="styles.action">
-                <VSkeletonLoader
-                    v-if="loading"
-                    :class="styles.actionSkeleton"
-                />
                 <RouterLink
-                    v-else
                     :to="`/deposit/${ id }`"
                     :class="styles.actionWrap"
                 >
@@ -185,12 +191,7 @@ const shortAddress = computed(() => props.loading
             </div>
 
             <div :class="styles.action">
-                <VSkeletonLoader
-                    v-if="loading"
-                    :class="styles.actionSkeleton"
-                />
                 <RouterLink
-                    v-else
                     :to="`/withdrawal/${ id }`"
                     :class="styles.actionWrap"
                 >

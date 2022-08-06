@@ -77,14 +77,15 @@ const router = createRouter({
         //     },
         //     component: () => import('../2v/views/kyc/KycView.vue')
         // },
-        // {
-        //     path: '/explore/:token',
-        //     name: 'exploreToken',
-        //     meta: {
-        //         layout: defaultLayout
-        //     },
-        //     component: () => import('../../views/Explore/Token/TokenView.vue')
-        // },
+        {
+            path: '/explore/:token',
+            name: 'exploreToken',
+            meta: {
+                layout: defaultLayout,
+                headerMobileAddon: () => import('../../views/Explore/Token/components/ChartButton/ChartButton')
+            },
+            component: () => import('../../views/Explore/Token/TokenView.vue')
+        },
         // {
         //     path: '/affiliate',
         //     name: 'affiliate',

@@ -35,11 +35,6 @@ const props = defineProps({
         type: Number,
         default: 0
     },
-    delay: {
-        type: Number,
-        default: 0
-    },
-    ready: Boolean, // TODO: remove
     mobile: Boolean
 });
 
