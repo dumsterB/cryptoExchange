@@ -1,0 +1,26 @@
+.percent {
+    display: inline-block;
+    height: 25px;
+    padding: 0 8px;
+    border-radius: 68px;
+
+    &.green {
+        color: var(--color-success);
+        background-color: var(--color-bg-success);
+    }
+
+    &.red {
+        color: var(--color-danger);
+        background-color: var(--color-bg-danger);
+    }
+}
+
+.text {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1;
+    line-height: 25px;
+    white-space: nowrap;
+}
