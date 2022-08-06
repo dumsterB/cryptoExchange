@@ -1,8 +1,8 @@
 import PopperWrap from './Popper/PopperWrap.vue';
 
-function VTooltip(_, { attrs, slots }) {
+function VTooltip(props, { slots }) {
     return <PopperWrap
-        {...attrs}
+        {...props}
     >
         {{
             default: () => slots.default?.(),

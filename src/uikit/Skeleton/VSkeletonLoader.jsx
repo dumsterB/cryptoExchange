@@ -1,13 +1,7 @@
 import styles from './VSkeletonLoader.module.scss';
 
-function VSkeletonLoader(_, { attrs }) {
-    return <div
-        class={[
-            styles.skeleton,
-            attrs.class
-        ]}
-        style={attrs.style}
-    />;
+function VSkeletonLoader() {
+    return <div class={styles.skeleton} />;
 }
 
 export default VSkeletonLoader;

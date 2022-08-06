@@ -1,4 +1,3 @@
-import { h } from 'vue';
 import { formatCurrencyToParts } from '@/utils/currency';
 
 function CurrencyNumber(
@@ -9,29 +8,20 @@ function CurrencyNumber(
         color,
         fractionColor,
         fractionClass
-    },
-    { attrs }
+    }
 ) {
-    return h(
-        'div',
-        {
-            ...attrs
-        },
-        formatCurrencyToParts(value, locale, currencyCode).map(({ type, value }) => {
+    return <div>
+        {formatCurrencyToParts(value, locale, currencyCode).map(({ type, value }) => {
             const isFraction = type === 'decimal' || type === 'fraction';
 
-            return h('span', {
-                style: {
-                    color: isFraction
-                        ? fractionColor
-                        : color
-                },
-                class: isFraction && fractionClass
-                    ? fractionClass
-                    : null
-            }, value);
-        })
-    );
+            return <span
+                class={isFraction && fractionClass ? fractionClass : null}
+                style={{ color: isFraction ? fractionColor : color }}
+            >
+                {value}
+            </span>;
+        })}
+    </div>;
 }
 
 CurrencyNumber.props = {

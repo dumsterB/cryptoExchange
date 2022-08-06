@@ -2,8 +2,8 @@ import { Transition } from 'vue';
 import { VButton, VIcon } from '@/uikit';
 import styles from './OtpSuccess.module.scss';
 
-function OtpSuccess({ t }, { attrs, slots, emit }) {
-    return <div class={[styles.content, attrs.class]}>
+function OtpSuccess({ t }, { slots, emit }) {
+    return <div class={styles.content}>
         <Transition
             appear
             enterFromClass={styles.iconAppearEnterFrom}
