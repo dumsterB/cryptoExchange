@@ -1,18 +1,18 @@
 export const intervals = {
     hour: {
-        value: '1m',
+        value: '1h',
         label: 'chartInterval1h'
     },
     day: {
-        value: '5m',
+        value: '1D',
         label: 'chartInterval1d'
     },
     month: {
-        value: '1h',
+        value: '1M',
         label: 'chartInterval1m'
     },
     year: {
-        value: '1D',
+        value: '1Y',
         label: 'chartInterval1y'
     }
 };
