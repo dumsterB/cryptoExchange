@@ -1,0 +1,64 @@
+.withdraw{
+  background: #FFFFFF;
+  border: 1px solid #E3E2E9;
+  box-shadow: 0px 38px 70px #ECEBF0;
+  border-radius: 20px;
+  margin: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  width: 490px;
+  height: 450px;
+}
+.toggle{
+  background: #F2F3F9;
+  border-radius: 16px;
+  display: flex;
+  height: 60px;
+  padding: 4px 3px 5px 5px;
+  justify-content: space-between;
+}
+.toggleButtonActive{
+  height: 52px;
+  width: 50%;
+  border: 1px solid transparent!important;
+  background: #F2F3F9;
+  cursor: pointer;
+}
+.toggleButton{
+  height: 52px;
+  width: 50%;
+  border: 1px solid transparent!important;
+  border-radius: 16px;
+  background: white;
+  cursor: pointer;
+}
+.usdt{
+  color: #ADABB4;
+  font-size: 34px;
+}
+.sumContent{
+  margin: auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.totalSum{
+  font-size: 34px;
+  color: #15141B;
+  font-style: normal;
+  font-weight: 507;
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+.totalSum2{
+  font-weight: 507;
+  font-size: 14px;
+  line-height: 100%;
+  color: #15141B;
+  text-align: center;
+  margin-top: 15px;
+}
+.divider{
+  border: 1px solid #E3E2E9;
+}

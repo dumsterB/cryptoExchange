@@ -6,5 +6,5 @@ export default {
     start: 'Начать',
     next: 'Далее',
     reload: 'Обновить',
-    share: 'Поделиться'
+    share: 'Поделиться',
 };

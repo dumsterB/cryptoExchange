@@ -98,6 +98,8 @@ export default {
     checkNetwork: 'Убедитесь, что сеть верна:',
     depositByCard: 'С карты',
     depositByCrypto: 'С другого кошелька',
+    to_card: 'На карту',
+    to_wallet: 'На другой кошелек',
     affiliate: affiliate,
     button: button,
     errors: errors,

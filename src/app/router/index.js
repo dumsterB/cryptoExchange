@@ -43,7 +43,19 @@ const router = createRouter({
             meta: {
                 layout: defaultLayout
             },
-            component: () => import('@/views/Withdrawal/WithdrawalView.vue')
+            component: () => import('@/views/Withdrawal/WithdrawalView.vue'),
+            children:[
+                {
+                    path: '/withdraw/fiat',
+                    name: 'withdrawFiat',
+                    component: () => import('@/views/Withdrawal/components/FormFiat/FormFieldsFiat.vue'),
+                },
+                {
+                    path: '/withdraw/token',
+                    name: 'withdrawToken',
+                    component: () => import('@/views/Withdrawal/components/FormToken/FormFieldsToken.vue'),
+                }
+            ]
         },
         {
             path: '/login',
