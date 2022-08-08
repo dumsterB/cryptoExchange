@@ -37,14 +37,14 @@ const router = createRouter({
         //     path: '/withdrawal',
         //     redirect: () => ({ path: '/withdrawal/bitcoin' })
         // },
-        // {
-        //     path: '/withdrawal/:asset',
-        //     name: 'withdrawal',
-        //     meta: {
-        //         layout: DEFAULT_LAYOUT
-        //     },
-        //     component: () => import('../views/WithdrawalView.vue')
-        // },
+         {
+            path: '/withdraw',
+            name: 'withdraw',
+            meta: {
+                layout: defaultLayout
+            },
+            component: () => import('@/views/Withdrawal/WithdrawalView.vue')
+        },
         {
             path: '/login',
             name: 'login',
