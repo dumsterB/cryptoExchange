@@ -43,6 +43,7 @@ const router = createRouter({
             meta: {
                 layout: defaultLayout
             },
+             redirect: () => ({ path: '/withdraw/token' }),
             component: () => import('@/views/Withdrawal/WithdrawalView.vue'),
             children:[
                 {
