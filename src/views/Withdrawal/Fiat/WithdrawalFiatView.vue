@@ -10,6 +10,14 @@ import { useCurrencyStore } from '@/states/currency/store';
 import { formatCurrency } from '@/utils/currency';
 import { formatTokenQuantity } from '@/utils/token';
 
+// все обращения к апи складываем в @/states/payments/fetch и в этой папке уже файлы
+// fetchWithdrawalToCardData.js
+// calculateWithdrawalSums.js
+// Как пример
+
+// также можно использовать хуки для скрыти бизнес логики, которая тут сейчас будет
+// 
+
 // TODO: useFetch for api call
 // useFetch
 const dataFromApi = {
