@@ -1,4 +1,5 @@
 export { default as VAvatar } from './Avatar/VAvatar';
+export { default as VBox } from './Box/VBox';
 export { default as VButton } from './Button/VButton.vue';
 export { default as VCheckbox } from './Checkbox/VCheckbox.vue';
 export { default as VContainer } from './Container/VContainer';
