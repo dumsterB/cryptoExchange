@@ -37,24 +37,22 @@ const router = createRouter({
         //     path: '/withdrawal',
         //     redirect: () => ({ path: '/withdrawal/bitcoin' })
         // },
-         {
-            path: '/withdraw',
-            name: 'withdraw',
+        {
+            path: '/withdrawal',
+            name: 'withdrawal',
             meta: {
                 layout: defaultLayout
             },
-             redirect: () => ({ path: '/withdraw/token' }),
-            component: () => import('@/views/Withdrawal/WithdrawalView.vue'),
-            children:[
+            redirect: () => '/withdrawal/fiat',
+            component: () => import('../../views/Withdrawal/WithdrawalView.vue'),
+            children: [
                 {
-                    path: '/withdraw/fiat',
-                    name: 'withdrawFiat',
-                    component: () => import('@/views/Withdrawal/components/FormFiat/FormFieldsFiat.vue'),
+                    path: '/withdrawal/token',
+                    component: () => import('../../views/Withdrawal/Token/WithdrawalTokenView.vue')
                 },
                 {
-                    path: '/withdraw/token',
-                    name: 'withdrawToken',
-                    component: () => import('@/views/Withdrawal/components/FormToken/FormFieldsToken.vue'),
+                    path: '/withdrawal/fiat',
+                    component: () => import('../../views/Withdrawal/Fiat/WithdrawalFiatView.vue')
                 }
             ]
         },
