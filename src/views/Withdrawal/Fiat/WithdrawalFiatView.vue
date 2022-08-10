@@ -1,9 +1,11 @@
 <script setup>
 import { computed } from 'vue';
+import { AppPopup } from '@/components/Popup';
 import { VButton, VInput } from '@/uikit';
 import FormInput from '../components/Input/FormInput';
 import { useI18n } from 'vue-i18n';
 import { useFetch } from '@/hooks/useFetch';
+import { usePopup } from '@/hooks/usePopup';
 import { useCurrencyStore } from '@/states/currency/store';
 import { formatCurrency } from '@/utils/currency';
 import { formatTokenQuantity } from '@/utils/token';
@@ -33,6 +35,11 @@ const fiatBalance = computed(
 const netSum = computed(
     () => formatCurrency(dataFromApiConvert.netSum, locale.value, currencyStore.code)
 );
+
+const {
+    isPopupOpen: isLimitsOpened,
+    openPopup: openLimits
+} = usePopup();
 </script>
 
 <template>
@@ -54,7 +61,10 @@ const netSum = computed(
             </template>
 
             <template #addon>
-                <button :class="styles.limits">
+                <button
+                    :class="styles.limits"
+                    @click="openLimits"
+                >
                     {{ t('limit') }}
                 </button>
             </template>
@@ -110,6 +120,10 @@ const netSum = computed(
                 </VButton>
             </div>
         </div>
+
+        <AppPopup v-model="isLimitsOpened">
+            limits
+        </AppPopup>
 
     </div>
 </template>
