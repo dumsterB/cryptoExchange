@@ -1,22 +1,49 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, reactive, ref, watchEffect } from 'vue';
 import { AppPopup } from '@/components/Popup';
 import { VButton, VInput } from '@/uikit';
 import FormInput from '../components/Input/FormInput';
 import { useI18n } from 'vue-i18n';
-import { useFetch } from '@/hooks/useFetch';
+// import { useFetch } from '@/hooks/useFetch';
 import { usePopup } from '@/hooks/usePopup';
 import { useCurrencyStore } from '@/states/currency/store';
 import { formatCurrency } from '@/utils/currency';
 import { formatTokenQuantity } from '@/utils/token';
+import { fetchWithdrawalData } from '@/states/payments/fetch/fetchWithdrawalData';
+import { calcWithdrawalResult } from '@/states/payments/fetch/calcWithdrawalResult';
 
-// все обращения к апи складываем в @/states/payments/fetch и в этой папке уже файлы
-// fetchWithdrawalToCardData.js
-// calculateWithdrawalSums.js
-// Как пример
+// пример
+const usdtInputValue = ref('');
+const balances = reactive({
+    usdtBalance: 0,
+    usdtBalanceFiat: 0
+});
 
-// также можно использовать хуки для скрыти бизнес логики, которая тут сейчас будет
-// 
+const result = reactive({
+    netSum: 0,
+    psFee: 0,
+    serviceFee: 0
+});
+onMounted(async () => {
+    const data = await fetchWithdrawalData(); // TODO: передать currencyCode из currencyStore ниже
+
+    balances.usdtBalance = data.usdtBalance;
+    balances.usdtBalanceFiat = data.usdtBalanceFiat;
+});
+
+// теперь при изменении usdtInputValue или currencyCode вызовется запрос на бек, для 
+// только нужен debaunce, чтобы каждую секунду бек не дергать
+watchEffect(async () => {
+    if (usdtInputValue.value) {
+        const data = await calcWithdrawalResult(usdtInputValue.value); // TODO: передать currencyCode из currencyStore ниже
+
+        result.netSum = data.netSum;
+        result.psFee = data.psFee;
+        result.serviceFee = data.serviceFee;
+    }
+});
+
+
 
 // TODO: useFetch for api call
 // useFetch
