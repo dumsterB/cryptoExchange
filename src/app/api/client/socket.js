@@ -28,13 +28,13 @@ function disconnect() {
 
 // TODO: check this
 watchEffect(() => {
-    if (!socket && AccessToken.ref.value) {
-        connect();
-    }
+    // if (!socket && AccessToken.ref.value) {
+    //     connect();
+    // }
 
-    if (socket && !AccessToken.ref.value) {
-        setTimeout(disconnect, 2000); // timeout ??? Did him cause of unsubscribe socket emits on unmounted
-    }
+    // if (socket && !AccessToken.ref.value) {
+    //     setTimeout(disconnect, 2000); // timeout ??? Did him cause of unsubscribe socket emits on unmounted
+    // }
 });
 
 function sendMessageToSocket(type, payload) {
