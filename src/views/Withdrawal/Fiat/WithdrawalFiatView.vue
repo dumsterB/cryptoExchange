@@ -47,8 +47,11 @@ watchEffect(async () => {
         result.psFee = data.psFee;
         result.serviceFee = data.serviceFee;
     }
+    if(cardNumberInputValue.value){
 
+    }
 });
+
 
 // TODO: useFetch for api call
 // useFetch
@@ -70,6 +73,7 @@ async function submit(){
     cardNumber: cardNumberInputValue.value
   }
  const res = await fetchWithdrawalData(data,isLoading)
+  console.log(res)
   cardNumberInputValue.value = ''
   usdtInputValue.value = ''
   isLoading.value = res.isLoading
@@ -83,7 +87,7 @@ const cardNumberHandler = computed(()=>{
 })
 
 const disableHandler = computed(
-    () =>  usdtInputValue.value && cardNumberInputValue.value.length === 12
+    () =>  usdtInputValue.value && cardNumberInputValue.value.length === 19
 )
 
 const fiatBalance = computed(
@@ -178,7 +182,7 @@ const {
             </template>
 
             <template #input>
-                <VInput v-model="cardNumberInputValue" @change="cardNumberHandler"  placeholder="000 000 000 000">
+                <VInput :mask="{mask: '9999 9999 9999 9999', greedy: true}" v-model="cardNumberInputValue" @change="cardNumberHandler"  placeholder="000 000 000 000">
                     <template #addon-right v-if="cardType">
                       <img height="50"  v-if="cardType.value == 4" src="../../../app/assets/icons/visa-logo-svgrepo-com.svg" alt="">
                       <img height="40"  :class="styles.iconMasterCard" v-if="cardType.value == 2" src="../../../app/assets/icons/mastercard.svg" alt="">
