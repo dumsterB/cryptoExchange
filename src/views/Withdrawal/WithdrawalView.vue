@@ -1,5 +1,6 @@
 <script setup>
 import { VBox, VToggleButton, VToggleButtonGroup } from '@/uikit';
+import { useBalance } from "@/states/withdraw/store";
 import { RouterView } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 

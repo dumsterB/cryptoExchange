@@ -1,7 +1,8 @@
 // функция для получения стартовой даты для формы вывода
-export async function fetchWithdrawalData(currencyCode) {
+export async function fetchWithdrawalData(currencyCode,isLoading) {
     return {
         usdtBalance: 1000,
-        usdtBalanceFiat: 1000
+        usdtBalanceFiat: 1000,
+        isLoading: false
     };
 }

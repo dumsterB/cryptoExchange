@@ -108,7 +108,8 @@ export default {
     commission2: 'Комиссия посредника',
     getSum: 'Сумма к получению',
     confirm: 'Подтвердить',
-
+    sumChecker: 'Сумма превышает ваш баланс',
+    requiredField: 'Заполните поля',
     affiliate: affiliate,
     button: button,
     errors: errors,
