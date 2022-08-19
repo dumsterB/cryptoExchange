@@ -1,28 +1,24 @@
-import { useField, useForm } from 'vee-validate';
-import { reactive, ref } from 'vue';
-
-
-export async function useWithdrawalValidation(usdtBalance) {
-    // check in documentation
-    let require = 'requiredField'
-    // let checker = 'sumChecker'
-            if (usdtBalance) {
-                console.log(usdtBalance);
-            }
-    if (!usdtBalance) {
-        return  require
+import { useField } from 'vee-validate';
+import { useI18n } from 'vue-i18n';
+export async function useWithdrawalValidation(inputValue,usdtBalance) {
+    // t('requiredField')
+    // t('sumChecker')
+    if (!inputValue) {
+        return 'requiredField';
     }
+
+    if (inputValue >= usdtBalance) {
+        return 'sumChecker';
+    }
+
 
     const {
         value: usdtInputValue,
         errorMessage: sumError
     } = useField('usdtInputValue');
 
-    // const confirm = handleSubmit(confirmCallback);
-
     return {
         usdtInputValue,
         sumError,
-        confirm
     };
 }
