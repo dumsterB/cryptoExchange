@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { VIcon, VSpin, VTooltip } from '@/uikit';
-import { CurrencyNumber } from '@/components/Currency';
-import AffiliateHero from './components/hero/AffiliateHero.vue';
+import { CurrencyNumber, SafeShow } from '@/components/Currency';
+import AffiliateHero from './components/Hero/AffiliateHero.vue';
 import CountItem from './components/CountItem/CountItem';
 import FriendsTable from './components/FriendsTable/FriendsTable.vue';
 import { useI18n } from 'vue-i18n';
@@ -53,13 +53,15 @@ onMounted(async () => {
                 </template>
 
                 <template #value>
-                    <CurrencyNumber
-                        :value="affiliate.income"
-                        :currency-code="currencyStore.code"
-                        :locale="locale"
-                        :class="styles.currency"
-                        :fraction-class="styles.currencyFraction"
-                    />
+                    <SafeShow>
+                        <CurrencyNumber
+                            :value="affiliate.income"
+                            :currency-code="currencyStore.code"
+                            :locale="locale"
+                            :class="styles.currency"
+                            :fraction-class="styles.currencyFraction"
+                        />
+                    </SafeShow>
                 </template>
             </CountItem>
 
