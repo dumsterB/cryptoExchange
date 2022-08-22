@@ -1,24 +1,39 @@
-import { useField } from 'vee-validate';
+import { object, string, ref as yupRef } from 'yup';
+import { fields } from '@/utils/auth';
 import { useI18n } from 'vue-i18n';
-export async function useWithdrawalValidation(inputValue,usdtBalance) {
-    // t('requiredField')
-    // t('sumChecker')
-    if (!inputValue) {
-        return 'requiredField';
-    }
+import { useField, useForm } from 'vee-validate';
 
-    if (inputValue >= usdtBalance) {
-        return 'sumChecker';
-    }
+export function useWithdrawalValidation() {
+    const { t } = useI18n();
 
+    // TODO: move to config
+    const CARD_NUMBER_MIN_LENGTH = 16;
+    const validationSchema = object({
+        [fields.USDT_INPUT]: string()
+            .required(t('requiredField')),
+        [fields.CARD_NUMBER]: string()
+            .required(t('requiredField'))
+            .min(CARD_NUMBER_MIN_LENGTH, t('errors.minLength', { count: CARD_NUMBER_MIN_LENGTH }))
+    });
+
+
+    useForm({ validationSchema });
 
     const {
-        value: usdtInputValue,
-        errorMessage: sumError
-    } = useField('usdtInputValue');
+        value: usdtInput,
+        errorMessage: usdtError
+    } = useField(fields.USDT_INPUT);
+
+    const {
+        value: cardNumber,
+        errorMessage: cardError
+    } = useField(fields.CARD_NUMBER);
+
 
     return {
-        usdtInputValue,
-        sumError,
+        usdtInput,
+        usdtError,
+        cardNumber,
+        cardError
     };
 }

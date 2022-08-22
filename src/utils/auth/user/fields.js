@@ -5,6 +5,8 @@ const SURNAME = 'surname';
 const COUNTRY = 'country';
 const PASSWORD = 'password';
 const PASSWORD_CONFIRM = 'passwordConfirm';
+const USDT_INPUT = 'usdtInput';
+const CARD_NUMBER = 'cardNumber';
 
 export default {
     EMAIL,
@@ -13,5 +15,7 @@ export default {
     SURNAME,
     COUNTRY,
     PASSWORD,
-    PASSWORD_CONFIRM
+    PASSWORD_CONFIRM,
+    USDT_INPUT,
+    CARD_NUMBER
 };

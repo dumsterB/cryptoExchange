@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted, reactive, ref, watchEffect } from 'vue';
-import { VButton, VInput,VSpin } from '@/uikit';
+import { VButton, VInput,VSpin} from '@/uikit';
 import { useI18n } from 'vue-i18n';
 const { t, locale } = useI18n();
 import { AppPopup } from '@/components/Popup';
@@ -12,13 +12,11 @@ import { formatTokenQuantity } from '@/utils/token';
 import { useCurrencyStore } from '@/states/currency/store';
 import { fetchWithdrawalData } from '@/states/payments/fetch/fetchWithdrawalData';
 import { calcWithdrawalResult } from '@/states/payments/fetch/calcWithdrawalResult';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+const {usdtInput,usdtError,cardError,cardNumber} = useWithdrawalValidation();
 
-
-const usdtInputValue = ref('');
-const errorMessage = ref('');
-const cardNumberInputValue = ref('');
-const cardType = ref({src:'',value:''});
 const isLoading = ref(false);
 
 const balances = reactive({
@@ -44,64 +42,40 @@ const dataFromApiConvert = {
 const currencyStore = useCurrencyStore();
 
 onMounted(async () => {
-    const data = await fetchWithdrawalData(); // TODO: передать currencyCode из currencyStore ниже
+    const data = await fetchWithdrawalData(usdtInput.value); // TODO: передать currencyCode из currencyStore ниже
     balances.usdtBalance = data.usdtBalance;
     balances.usdtBalanceFiat = data.usdtBalanceFiat;
 });
 
-// теперь при изменении usdtInputValue или currencyCode вызовется запрос на бек, для 
-// только нужен debaunce, чтобы каждую секунду бек не дергать
 watchEffect(async () => {
-    const data = await  calcWithdrawalResult(usdtInputValue.value); // TODO: передать currencyCode из currencyStore ниже
-    const res = await useWithdrawalValidation(usdtInputValue.value,dataFromApi.usdtBalance);
-    errorMessage.value = res;
+    const data = await  calcWithdrawalResult(usdtInput.value); // TODO: передать currencyCode из currencyStore ниже
     result.netSum = data.netSum;
     result.psFee = data.psFee;
     result.serviceFee = data.serviceFee;
 });
 
 
-// TODO: useFetch for api call
-// useFetch
-
-const cardNumberHandler = () => {
-    const card = [{value:'4'},{value:'2'},{value:'5'}];
-    cardType.value  =  card.find(ell=> ell.value  === cardNumberInputValue.value[0]);
-};
-
-const  submit = async() =>{
-    isLoading.value = true;
+const submit = async() =>{
     const data = {
-        usdt: usdtInputValue.value,
-        cardNumber: cardNumberInputValue.value
+        usdt: usdtInput.value,
+        cardNumber: cardNumber.value
     };
-    const res = await fetchWithdrawalData(data,isLoading);
-    console.log(res);
-    cardNumberInputValue.value = '';
-    usdtInputValue.value = '';
-    isLoading.value = res.isLoading;
+    await fetchWithdrawalData(data);
+    usdtInput.value = '';
+    cardNumber.value = '';
+    router.push('/');
 };
 
-// eslint-disable-next-line vue/return-in-computed-property
-const cardIcon = computed(() => {
-    switch(cardType.value) {
-    case 4:
-        return '../../../app/assets/icons/visa-logo-svgrepo-com.svg';
-    case 2:
-        return '../../../app/assets/icons/mastercard.svg';
-    case 5:
-        return '../../../app/assets/icons/mir-logo.svg';
-    }
-
-});
-
+// const cardIcon = computed(() => {
+//     return 'mir-logo';
+// });
 
 const balance = computed(
     () => formatTokenQuantity(dataFromApi.usdtBalance)
 );
 
 const disableHandler = computed(
-    () =>  errorMessage.value
+    () =>  cardError.value || usdtError.value
 );
 
 const fiatBalance = computed(
@@ -147,20 +121,18 @@ const {
             </template>
 
             <template #input>
-                <VInput
-                    v-model="usdtInputValue"
-                    :value="value"
-                    :placeholder="t('enterSum')"
-                    v-on="validationListeners"
-                >
-                    <template #addon-right>
-                        <span :class="styles.curr"> USDT </span>
-                    </template>
-                </VInput>
-                <div v-if="errorMessage">
-                    <p :class="styles.errorMessage">{{ t(`${errorMessage}`) }}</p>
+                <div>
+                    <VInput
+                        v-model="usdtInput"
+                        type="email"
+                        :placeholder="t('enterSum')"
+                        :error="usdtError"
+                    >
+                        <template #addon-right>
+                            <span :class="styles.curr"> USDT </span>
+                        </template>
+                    </VInput>
                 </div>
-
             </template>
         </FormInput>
 
@@ -171,24 +143,22 @@ const {
 
             <template #input>
                 <VInput
-                    v-model="cardNumberInputValue"
+                    v-model="cardNumber"
                     :mask="{mask: '9999 9999 9999 9999', greedy: true}"
                     placeholder="000 000 000 000"
-                    @change="cardNumberHandler"
+                    :error="cardError"
                 >
                     <template
-                        v-if="cardType"
                         #addon-right
                     >
-                        <VIcon
-                            :key="cardIcon"
-                            :value="cardIcon"
-                        />
+                        <!--                        <VIcon-->
+                        <!--                            :key="cardIcon"-->
+                        <!--                            :name="cardIcon"-->
+                        <!--                        />-->
                     </template>
                 </VInput>
             </template>
         </FormInput>
-        <h1>{{ cardIcon }} : {{ cardType.value }}</h1>
         <div :class="styles.fees">
             <div :class="styles.fee">
                 <div :class="styles.feeLabel">{{ t('commission') }}</div>
