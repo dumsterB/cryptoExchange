@@ -15,6 +15,7 @@ module.exports = {
         'withDefaults': 'readonly',
     },
     'parserOptions': {
+        'parser': '@typescript-eslint/parser',
         'ecmaFeatures': {
             'jsx': true
         }
