@@ -23,10 +23,10 @@ const emit = defineEmits({
 
 const { t } = useI18n();
 const {
-    isPopupOpen: isInstructionOpened,
-    openPopup: openInstruction,
-    closePopup: closeInstruction
-} = usePopup();
+    isInstructionOpen,
+    openInstruction,
+    closeInstruction
+} = usePopup('Instruction');
 
 const isButtonDisabled = computed(
     () => !props.sendingAvailable
@@ -75,7 +75,7 @@ const handleCodeSubmit = (code) => emit('submit', code);
             {{ t('haveYouGotOtp') }}
         </div>
 
-        <AppPopup v-model="isInstructionOpened">
+        <AppPopup v-model="isInstructionOpen">
             <div :class="styles.popup">
                 <div :class="styles.popupHead">
                     <div :class="styles.popupIcon">

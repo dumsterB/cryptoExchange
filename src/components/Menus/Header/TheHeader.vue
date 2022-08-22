@@ -35,9 +35,9 @@ const openMobileMenu = () => isMobileMenuOpened.value = true;
 
 // settings menu
 const {
-    togglePopup: toggleSettingMenu,
-    isPopupOpen: isSettingsMenuVisible
-} = usePopup();
+    isSettingMenuOpen,
+    toggleSettingMenu
+} = usePopup('SettingMenu');
 
 const settingsButton = ref(null);
 
@@ -120,7 +120,7 @@ const handleBalanceButtonClick = () => {
     />
 
     <AppPopup
-        v-model="isSettingsMenuVisible"
+        v-model="isSettingMenuOpen"
         view="pane"
         :pane-activator="settingsButton"
     >

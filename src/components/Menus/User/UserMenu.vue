@@ -6,7 +6,7 @@ import { VerificationStatus } from '@/components/User';
 import MenuLink from '../Link/MenuLink.vue';
 import { logout } from '@/states/user/services/logout';
 import { useI18n } from 'vue-i18n';
-import { usePopup } from '@/hooks/usePopup.js';
+import { usePopup } from '@/hooks/usePopup';
 import { useUserStore } from '@/states/user/store';
 import { userLinks } from '../config';
 
@@ -19,17 +19,17 @@ const attrs = useAttrs();
 const styles = useCssModule('styles');
 
 const {
-    openPopup: openMenu,
-    closePopup: closeMenu,
-    isPopupOpen: isMenuVisible
-} = usePopup();
+    isMenuOpen,
+    openMenu,
+    closeMenu
+} = usePopup('Menu');
 
 const user = ref(null);
 const userStore = useUserStore();
 const userClasses = computed(() => [
     styles.user,
     styles.button,
-    { [styles.opened]: isMenuVisible.value }
+    { [styles.opened]: isMenuOpen.value }
 ]);
 
 const links = userLinks(
@@ -76,7 +76,7 @@ const handleLogout = () => logout();
     </button>
 
     <AppPopup
-        v-model="isMenuVisible"
+        v-model="isMenuOpen"
         view="pane"
         :pane-activator="user"
     >

@@ -23,9 +23,9 @@ defineProps({
 
 const { t } = useI18n();
 const {
-    isPopupOpen: isShareOpen,
-    openPopup: openShare
-} = usePopup();
+    isShareOpen,
+    openShare
+} = usePopup('Share');
 
 const shareMetadata = computed(() => ({
     title: t('affiliate.shareTitle'),
