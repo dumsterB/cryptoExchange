@@ -6,7 +6,6 @@ import { useField, useForm } from 'vee-validate';
 export function useWithdrawalValidation() {
     const { t } = useI18n();
 
-    // TODO: move to config
     const CARD_NUMBER_MIN_LENGTH = 16;
     const validationSchema = object({
         [fields.USDT_INPUT]: string()

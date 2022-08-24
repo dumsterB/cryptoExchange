@@ -56,11 +56,12 @@ watchEffect(async () => {
 
 
 const submit = async() =>{
-    const data = {
+
+    await fetchWithdrawalData({
         usdt: usdtInput.value,
         cardNumber: cardNumber.value
-    };
-    await fetchWithdrawalData(data);
+    });
+
     usdtInput.value = '';
     cardNumber.value = '';
     router.push('/');
@@ -124,7 +125,7 @@ const {
                 <div>
                     <VInput
                         v-model="usdtInput"
-                        type="email"
+                        type="text"
                         :placeholder="t('enterSum')"
                         :error="usdtError"
                     >
@@ -162,11 +163,11 @@ const {
         <div :class="styles.fees">
             <div :class="styles.fee">
                 <div :class="styles.feeLabel">{{ t('commission') }}</div>
-                <div :class="styles.feeValue">$ 1.0</div>
+                <div :class="styles.feeValue">$ {{ result.serviceFee }} </div>
             </div>
             <div :class="styles.fee">
                 <div :class="styles.feeLabel">{{ t('commission2') }}</div>
-                <div :class="styles.feeValue">2 %</div>
+                <div :class="styles.feeValue">{{ result.psFee }} %</div>
             </div>
         </div>
 
@@ -188,7 +189,6 @@ const {
                     @click="submit"
                 >
                     <span v-if="!isLoading">{{ t('confirm') }}</span>
-                    <span v-if="isLoading"><VSpin ratio="1.5" /></span>
                 </VButton>
 
             </div>
