@@ -1,0 +1,26 @@
+.field {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+        'label addon'
+        'input input';
+    gap: 16px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    grid-area: label;
+}
+
+.addon {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    grid-area: addon;
+}
+
+.input {
+    grid-area: input;
+}
