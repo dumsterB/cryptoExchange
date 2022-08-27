@@ -29,6 +29,10 @@
     }
 }
 
+.addon {
+    display: none;
+}
+
 @include min1201 {
     .menuButton {
         display: none;
@@ -47,6 +51,20 @@
         &.buttonBuy {
             display: flex;
             margin-right: 16px;
+        }
+    }
+}
+
+@include max1000 {
+    .header {
+        &.mobileAddon {
+            .title {
+                display: none;
+            }
+
+            .addon {
+                display: block;
+            }
         }
     }
 }

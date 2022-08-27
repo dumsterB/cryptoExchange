@@ -1,10 +1,10 @@
 import styles from './VFlagIcon.module.scss';
 
-function FlagIcon({ code }, { attrs }) {
+function FlagIcon({ code }) {
     const style = { backgroundImage: `url(/images/flags/${code}.svg)` };
 
     return <div
-        class={[styles.flag, attrs.class]}
+        class={styles.flag}
         style={style}
     >
     </div>;

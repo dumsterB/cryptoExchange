@@ -13,31 +13,20 @@ import { useBalanceStore } from '@/states/balance/store';
 
 const { t } = useI18n();
 const attrs = useAttrs();
-// const slots = useSlots();
 const route = useRoute();
 const styles = useCssModule('styles');
 
 const userStore = useUserStore();
 
-// const headerClasses = computed(() => [
-//     styles.header,
-//     { [styles.mobileAddon]: hasMobileAddon.value }
-// ]);
-
-// const hasMobileAddon = computed(() => !!slots.mobileAddon?.());
-
 let addonComponent = null;
 
 if (route.meta.headerMobileAddon) {
-    // TODO: check
-    // addonComponent = defineAsyncComponent(
-    //     () => import(route.meta.headerMobileAddon)
-    // );   
+    addonComponent = defineAsyncComponent(() => route.meta.headerMobileAddon());   
 }
 
 const headerClasses = computed(() => [
     styles.header,
-    { [styles.mobileAddon]: addonComponent }
+    { [styles.mobileAddon]: route.meta.headerMobileAddon }
 ]);
 
 // mobile menu
@@ -46,9 +35,9 @@ const openMobileMenu = () => isMobileMenuOpened.value = true;
 
 // settings menu
 const {
-    togglePopup: toggleSettingMenu,
-    isPopupOpen: isSettingsMenuVisible
-} = usePopup();
+    isSettingMenuOpen,
+    toggleSettingMenu
+} = usePopup('SettingMenu');
 
 const settingsButton = ref(null);
 
@@ -70,15 +59,12 @@ const handleBalanceButtonClick = () => {
             <div :class="styles.wrap">
                 <div
                     v-if="addonComponent"
-                    :class="styles.mobileAddon"
+                    :class="styles.addon"
                 >
                     <Component :is="addonComponent" />
                 </div>
                 
-                <div
-                    v-else
-                    :class="styles.title"
-                >
+                <div :class="styles.title">
                     {{ route.meta.title ?? t('hello', { name: userStore.user.name }) }}
                 </div>
 
@@ -103,7 +89,10 @@ const handleBalanceButtonClick = () => {
                         :class="styles.button"
                         @click="handleBalanceButtonClick"
                     >
-                        <VIcon :name="balanceButtonIcon" />
+                        <VIcon
+                            :key="balanceButtonIcon"
+                            :name="balanceButtonIcon"
+                        />
                     </VIconButton>
 
                     <div
@@ -131,7 +120,7 @@ const handleBalanceButtonClick = () => {
     />
 
     <AppPopup
-        v-model="isSettingsMenuVisible"
+        v-model="isSettingMenuOpen"
         view="pane"
         :pane-activator="settingsButton"
     >

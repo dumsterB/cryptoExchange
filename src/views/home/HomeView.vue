@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { AppPopup, AppPopupHead, AppPopupBody } from '@/components/Popup';
-import { VIcon, VSpin, VSwitch } from '@/uikit';
+import { VIcon, VSpin, VSwitch, EmptyPlaceholder } from '@/uikit';
 import TokenPreview from './components/Token/TokenPreview.vue';
 import HomeAction from './components/Action/HomeAction.vue';
 import HomeBalance from './components/Balance/HomeBalance.vue';
@@ -22,7 +22,7 @@ const {
     isPopupOpen,
     openPopup,
     closePopup
-} = usePopup();
+} = usePopup('Popup');
 
 const hideSmallBalances = ref(false);
 
@@ -131,7 +131,7 @@ const TAB_HISTORY_TYPE = 'history';
                         :class="styles.tokensSpin"
                     />
                     
-                    <template v-else>
+                    <template v-else-if="filteredTokens.length">
                         <div :class="styles.tableCols">
                             <div :class="styles.col">
                                 {{ t('asset') }}
@@ -163,6 +163,8 @@ const TAB_HISTORY_TYPE = 'history';
                             :icon-url="iconUrl"
                         />
                     </template>
+
+                    <EmptyPlaceholder v-else />
                 </div>
             </TabsItem>
 

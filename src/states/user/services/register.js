@@ -59,16 +59,18 @@ async function register(form, setFieldError) {
 
 export const handleRegister = wrappedAsyncFunction(register);
 
-function getWaitListID() {
+export function getWaitListID() {
     const waitListID = localStorage.get(LS_REGISTER_KEY)?.waitListID;
 
     if (waitListID) {
         return waitListID;
     } else {
-        router.push('/register');
-
         throw new Error('errors.somethingFailed');
     }
+}
+
+export function setWaitListID(waitListID) {
+    localStorage.set(LS_REGISTER_KEY, { waitListID });
 }
 
 async function savePersonalInfo(form) {

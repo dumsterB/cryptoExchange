@@ -1,3 +1,4 @@
+export { default as VAlert } from './Alert/VAlert';
 export { default as VAvatar } from './Avatar/VAvatar';
 export { default as VBox } from './Box/VBox';
 export { default as VButton } from './Button/VButton.vue';
@@ -10,9 +11,11 @@ export { default as VSpin } from './Spin/VSpin.vue';
 export { default as VSwitch } from './Switch/VSwitch.vue';
 export { default as VToggleButton } from './ToggleButton/VToggleButton';
 export { default as VToggleButtonGroup } from './ToggleButton/Group/VToggleButtonGroup';
+export { default as VTooltip } from './Tooltip/VTooltip';
 export { default as VIcon } from './Icon/VIcon';
 export { default as VIconButton } from './IconButton/IconButton';
 export { default as VFlagIcon } from './FlagIcon/VFlagIcon';
-export { default as VCodeField } from './VCodeField/VCodeField.vue';
+export { default as VCodeField } from './CodeField/VCodeField.vue';
 export { default as EmptyPlaceholder } from './EmptyPlaceholder/EmptyPlaceholder.vue';
 export { default as VRelativeChange } from './RelativeChange/VRelativeChange';
+export { default as VSkeletonLoader } from './Skeleton/VSkeletonLoader';

@@ -1,14 +1,13 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { VButton } from '@/uikit';
+import OtpForm from '../../components/OtpSuccess/OtpForm';
+import OtpSuccess from '../../components/OtpSuccess/OtpSuccess';
 import FlowStep from './components/Step/FlowStep';
-import OtpForm from './components/OtpForm/OtpForm.vue';
-import OtpSuccess from './components/OtpSuccess/OtpSuccess';
 import PersonForm from './components/Person/PersonForm.vue';
 import SuccessResult from './components/Success/SuccessResult';
 import { useI18n } from 'vue-i18n';
-import { useSteps } from './hooks/useSteps';
-import { useOtpConfirmations } from './hooks/useOtpConfirmations';
+import { useFlowSteps, useOtpConfirmations } from './hooks';
 
 const { t } = useI18n();
 const {
@@ -19,7 +18,7 @@ const {
     currentStepMetadata,
     toNextStep,
     completeAllSteps
-} = useSteps();
+} = useFlowSteps();
 
 const { emailOtp, phoneOtp } = useOtpConfirmations(toNextStep);
 

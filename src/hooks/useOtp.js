@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n';
 import { useTimer } from './useTimer';
 import { useToast } from '@/components/Toast';
 import { OPT_CODE_SEND_INTERVAl } from '@/config/constants/auth';
-import wrappedAsyncFunction from '@/utils/wrappedAsyncFunction';
+import parseError from '@/utils/parseError';
 
 export function useOtp({
     sendFetch,
@@ -20,44 +20,49 @@ export function useOtp({
         sendingAvailable: true
     });
 
-    const wrappedSendFetch = wrappedAsyncFunction(sendFetch);
-    const wrappedSubmitFetch = wrappedAsyncFunction(submitFetch);
-
     const send = async () => {
-        state.loading = true;
+        try {
+            state.loading = true;
 
-        const { error } = await wrappedSendFetch();
+            await sendFetch();
 
-        state.loading = false;
-
-        if (error) {
-            toast.openDanger(t(error));
-        } else {
             startTimer({
                 onStart: () => state.sendingAvailable = false,
                 onEnd: () => state.sendingAvailable = true
             });
+        } catch (e) {
+            const error = parseError(e);
+
+            toast.openDanger(t(error));
+        } finally {
+            state.loading = false;
         }
     };
 
     const submit = async code => {
-        state.loading = true;
+        try {
+            state.loading = true;
 
-        const { error, ...data } = await wrappedSubmitFetch(code);
+            const data = await submitFetch(code);
 
-        state.loading = false;
-
-        if (error) {
-            toast.openDanger(t(error));
-        } else {
             handleSuccessSubmit(data);
+        } catch (e) {
+            const error = parseError(e);
+
+            state.error = true;
+            toast.openDanger(t(error));
+        } finally {
+            state.loading = false;
         }
     };
+
+    const resetError = () => state.error = false;
 
     return {
         state,
         timer,
         send,
-        submit
+        submit,
+        resetError
     };
 }

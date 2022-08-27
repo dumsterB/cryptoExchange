@@ -1,10 +1,7 @@
 import styles from './VContainer.module.scss';
 
-function VContainer(_, { attrs, slots }) {
-    return <div class={[
-        styles.container,
-        attrs.class
-    ]}>
+function VContainer(_, { slots }) {
+    return <div class={styles.container}>
         {slots.default?.()}
     </div>;
 }

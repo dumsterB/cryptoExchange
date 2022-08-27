@@ -1,0 +1,66 @@
+.grid {
+    display: grid;
+    grid-template: auto auto / repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+        'output chart'
+        'history history';
+    gap: 60px;
+}
+
+.output {
+    grid-area: output;
+}
+
+.chart {
+    grid-area: chart;
+}
+
+.history {
+    grid-area: history;
+}
+
+.title {
+    font-size: var(--text-headline-m-font-size);
+    font-weight: var(--text-headline-m-font-weight);
+    line-height: var(--text-headline-m-line-height);
+    white-space: nowrap;
+    margin-bottom: 60px;
+}
+
+.popupClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+@include max1200 {
+    .grid {
+        gap: 50px 42px;
+    }
+}
+
+@include max1000 {
+    .grid {
+        grid-template-areas:
+            'output output'
+            'history history';
+    }
+
+    .chart {
+        display: none;
+    }
+
+    .title {
+        margin-bottom: 40px;
+    }
+}
+
+@include max767 {
+    .grid {
+        gap: 42px;
+    }
+
+    .title {
+        margin-bottom: 30px;
+    }
+}

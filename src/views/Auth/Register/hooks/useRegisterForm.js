@@ -1,6 +1,7 @@
 import { reactive, ref } from 'vue';
 import { object, string, ref as yupRef } from 'yup';
 import { handleRegister } from '@/states/user/services/register';
+import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH, PHONE_MAX_LENGTH } from '@/config/constants/auth';
 import { fields } from '@/utils/auth';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
@@ -11,11 +12,6 @@ export function useRegisterForm() {
     const { t } = useI18n(); 
     const toast = useToast();
     const router = useRouter();
-
-    // TODO: move to config
-    const PHONE_MAX_LENGTH = 13;
-    const PASSWORD_MIN_LENGTH = 8;
-    const PASSWORD_MAX_LENGTH = 32;
 
     const validationSchema = object({
         [fields.EMAIL]: string()

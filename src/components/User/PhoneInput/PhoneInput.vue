@@ -51,7 +51,7 @@ const {
     isPopupOpen,
     openPopup,
     closePopup
-} = usePopup();
+} = usePopup('Popup');
 
 const { countries } = useCountries();
 const { search, filteredResults } = useSearch(countries);

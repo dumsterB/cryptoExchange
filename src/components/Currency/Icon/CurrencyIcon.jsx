@@ -1,8 +1,8 @@
 import styles from './CurrencyIcon.module.scss';
 
-function CurrencyIcon({ image }, { attrs }) {
+function CurrencyIcon({ image }) {
     return <div
-        class={[styles.icon, attrs.class]}
+        class={styles.icon}
         style={{ backgroundImage: `url(${image})` }}
     ></div>;
 }

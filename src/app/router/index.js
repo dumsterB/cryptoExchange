@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { defaultLayout, authLayout } from '@/components/Layouts';
+import { defaultLayout, authLayout, emptyLayout } from '@/components/Layouts';
 import HomeView from '@/views/Home/HomeView.vue';
 import checkAccess from '@/states/user/services/checkAccess';
 
@@ -80,30 +80,58 @@ const router = createRouter({
             },
             component: () => import('../../views/Auth/Register/Flow/RegisterFlowView.vue'),
         },
-        // {
-        //     path: '/kyc',
-        //     name: 'kyc',
-        //     meta: {
-        //         layout: EMPTY_LAYOUT
-        //     },
-        //     component: () => import('../2v/views/kyc/KycView.vue')
-        // },
-        // {
-        //     path: '/explore/:token',
-        //     name: 'exploreToken',
-        //     meta: {
-        //         layout: defaultLayout
-        //     },
-        //     component: () => import('../../views/Explore/Token/TokenView.vue')
-        // },
-        // {
-        //     path: '/affiliate',
-        //     name: 'affiliate',
-        //     meta: {
-        //         layout: DEFAULT_LAYOUT
-        //     },
-        //     component: () => import('../2v/views/affiliate/AffiliateView.vue')
-        // },
+        {
+            path: '/reset-password',
+            name: 'resetPassword',
+            meta: {
+                layout: authLayout
+            },
+            component: () => import('../../views/Auth/ResetPassword/ResetPasswordView.vue')
+        },
+        {
+            path: '/explore/:token',
+            name: 'exploreToken',
+            meta: {
+                layout: defaultLayout,
+                headerMobileAddon: () => import('../../views/Explore/Token/components/ChartButton/ChartButton')
+            },
+            component: () => import('../../views/Explore/Token/TokenView.vue')
+        },
+        {
+            path: '/deposit',
+            name: 'deposit',
+            meta: {
+                layout: defaultLayout
+            },
+            redirect: () => '/deposit/fiat',
+            component: () => import('../../views/Deposit/DepositView.vue'),
+            children: [
+                {
+                    path: '/deposit/token',
+                    component: () => import('../../views/Deposit/Token/DepositTokenView.vue')
+                },
+                {
+                    path: '/deposit/fiat',
+                    component: () => import('../../views/Deposit/Fiat/DepositFiatView.vue')
+                }
+            ]
+        },
+        {
+            path: '/kyc',
+            name: 'kyc',
+            meta: {
+                layout: emptyLayout
+            },
+            component: () => import('../../views/Kyc/KycView.vue')
+        },
+        {
+            path: '/affiliate',
+            name: 'affiliate',
+            meta: {
+                layout: defaultLayout
+            },
+            component: () => import('../../views/Affiliate/AffiliateView.vue')
+        },
     ]
 });
 

@@ -40,15 +40,14 @@ const {
                     :class="styles.fieldsInput"
                 />
 
-                <!-- TODO: password reset -->
-                <!-- <div :class="styles.forgotPassword">
+                <div :class="styles.forgotPassword">
                     <RouterLink
                         to="/reset-password"
                         :class="styles.forgotPasswordLink"
                     >
-                        {{ t('forgotPassword') }}
+                        {{ t('dontRememberPassword') }}
                     </RouterLink>
-                </div> -->
+                </div>
             </div>
 
             <VButton
