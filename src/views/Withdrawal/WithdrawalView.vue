@@ -1,6 +1,5 @@
 <script setup>
 import { VBox, VToggleButton, VToggleButtonGroup } from '@/uikit';
-import { useBalance } from "@/states/withdraw/store";
 import { RouterView } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
@@ -31,5 +30,5 @@ const { t } = useI18n();
 </template>
 
 <style lang="scss" module="styles">
-@import './WithdrawalView.module.scss';
+@import 'WithdrawalView.module';
 </style>

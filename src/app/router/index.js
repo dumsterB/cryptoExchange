@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { defaultLayout, authLayout, emptyLayout } from '@/components/Layouts';
+import { defaultLayout, authLayout } from '@/components/Layouts';
 import HomeView from '@/views/Home/HomeView.vue';
 import checkAccess from '@/states/user/services/checkAccess';
 
@@ -104,7 +104,7 @@ const router = createRouter({
                 layout: defaultLayout
             },
             redirect: () => '/deposit/fiat',
-            component: () => import('../../views/Deposit/DepositView.vue'),
+            component: () => import('../../views/Deposit/Fiat/DepositView.vue'),
             children: [
                 {
                     path: '/deposit/token',
@@ -112,18 +112,20 @@ const router = createRouter({
                 },
                 {
                     path: '/deposit/fiat',
-                    component: () => import('../../views/Deposit/Fiat/DepositFiatView.vue')
+                    component: () => import('../../views/Deposit/Fiat/DepositView.vue')
                 }
             ]
         },
-        {
-            path: '/kyc',
-            name: 'kyc',
-            meta: {
-                layout: emptyLayout
-            },
-            component: () => import('../../views/Kyc/KycView.vue')
-        },
+        /* TODO: FIX TO EMPTY LAYOUT */
+        // {
+        //     path: '/kyc',
+        //     name: 'kyc',
+        //
+        //     meta: {
+        //         layout: defaultLayout
+        //     },
+        //     component: () => import('../../views/Kyc/KycView.vue')
+        // },
         {
             path: '/affiliate',
             name: 'affiliate',

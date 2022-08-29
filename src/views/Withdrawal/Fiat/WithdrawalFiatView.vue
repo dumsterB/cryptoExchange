@@ -1,8 +1,7 @@
 <script setup>
 import { computed, onMounted, reactive, ref, watchEffect } from 'vue';
-import { VButton, VInput,VSpin} from '@/uikit';
+import { VButton, VInput} from '@/uikit';
 import { useI18n } from 'vue-i18n';
-const { t, locale } = useI18n();
 import { AppPopup } from '@/components/Popup';
 import FormInput from '../components/Input/FormInput';
 import { usePopup } from '@/hooks/usePopup';
@@ -13,7 +12,7 @@ import { useCurrencyStore } from '@/states/currency/store';
 import { fetchWithdrawalData } from '@/states/payments/fetch/fetchWithdrawalData';
 import { calcWithdrawalResult } from '@/states/payments/fetch/calcWithdrawalResult';
 import { useRouter } from 'vue-router';
-
+const { t, locale } = useI18n();
 const router = useRouter();
 const {usdtInput,usdtError,cardError,cardNumber} = useWithdrawalValidation();
 

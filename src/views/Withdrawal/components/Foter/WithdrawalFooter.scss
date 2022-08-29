@@ -1,0 +1,40 @@
+
+.action {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+        'label button'
+        'value button';
+  gap: 4px 16px;
+  margin-top: 30px;
+
+  &Label {
+    grid-area: label;
+    color: var(--color-typo-ghost);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  &Value {
+    grid-area: value;
+    font-weight: var(--text-headline-xl-font-weight);
+    font-size: var(--text-headline-xl-font-size);
+    line-height: 34px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  &Button {
+    grid-area: button;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+.submitBtn{
+  width: 150px;
+}
+.VButton-Spin{
+  margin-bottom: -15px!important;
+}

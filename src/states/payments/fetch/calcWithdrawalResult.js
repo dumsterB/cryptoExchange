@@ -6,6 +6,6 @@ export async function calcWithdrawalResult(amount, currencyCode) {
     return {
         netSum: 1000, // сумма которую получит клиент
         psFee: 10, // Комиссия посредника  
-        serviceFee: 5 // Комиссия Whitex
+        serviceFee: 5, // Комиссия Whitex
     };
 }

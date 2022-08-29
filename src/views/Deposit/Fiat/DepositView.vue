@@ -29,5 +29,5 @@ const { t } = useI18n();
 </template>
 
 <style lang="scss" module="styles">
-@import './DepositView.module.scss';
+@import 'DepositView.module';
 </style>

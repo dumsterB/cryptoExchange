@@ -12,9 +12,14 @@ export function useWithdrawalValidation() {
             .required(t('requiredField')),
         [fields.CARD_NUMBER]: string()
             .required(t('requiredField'))
-            .min(CARD_NUMBER_MIN_LENGTH, t('errors.minLength', { count: CARD_NUMBER_MIN_LENGTH }))
+            .min(CARD_NUMBER_MIN_LENGTH, t('errors.minLength', { count: CARD_NUMBER_MIN_LENGTH })),
+        [fields.ADDRESS_TO_GET]: string()
+            .required(t('requiredField')),
+        [fields.MIN_SUM_WITHDRAW]: string()
+            .required(t('requiredField')),
+        [fields.TOKEN]: string()
+            .required(t('requiredField'))
     });
-
 
     useForm({ validationSchema });
 
@@ -28,11 +33,31 @@ export function useWithdrawalValidation() {
         errorMessage: cardError
     } = useField(fields.CARD_NUMBER);
 
+    const {
+        value: addressToGet,
+        errorMessage: addressToGetError
+    } = useField(fields.ADDRESS_TO_GET);
+
+    const {
+        value: token,
+        errorMessage: tokentError
+    } = useField(fields.TOKEN);
+
+    const {
+        value: minSumWithdraw,
+        errorMessage: minSumWithdrawError
+    } = useField(fields.MIN_SUM_WITHDRAW);
 
     return {
         usdtInput,
         usdtError,
         cardNumber,
-        cardError
+        cardError,
+        addressToGet,
+        addressToGetError,
+        token,
+        tokentError,
+        minSumWithdraw,
+        minSumWithdrawError
     };
 }

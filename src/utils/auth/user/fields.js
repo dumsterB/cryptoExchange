@@ -7,6 +7,10 @@ const PASSWORD = 'password';
 const PASSWORD_CONFIRM = 'passwordConfirm';
 const USDT_INPUT = 'usdtInput';
 const CARD_NUMBER = 'cardNumber';
+const ADDRESS_TO_GET = 'address';
+const TOKEN = 'token';
+const MIN_SUM_WITHDRAW = 'minSumWithdraw'
+
 
 export default {
     EMAIL,
@@ -17,5 +21,8 @@ export default {
     PASSWORD,
     PASSWORD_CONFIRM,
     USDT_INPUT,
-    CARD_NUMBER
+    CARD_NUMBER,
+    ADDRESS_TO_GET,
+    TOKEN,
+    MIN_SUM_WITHDRAW
 };
