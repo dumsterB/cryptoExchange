@@ -7,18 +7,13 @@ defineProps({
         type: Object,
     },
 });
-const emit = defineEmits({
-    'submit': null
-});
-const submit = () =>{
-    emit('submit');
-};
+
+
 
 </script>
 <template>
     <div :class="styles.action">
         <div :class="styles.actionLabel">
-            <!-- TODO: translate -->
             {{ t('getSum') }}
         </div>
 

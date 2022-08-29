@@ -2,7 +2,6 @@
 import { computed, onMounted, reactive, ref, watchEffect } from 'vue';
 import { VInput, VIcon, VAlert, VButton} from '@/uikit';
 import { useI18n } from 'vue-i18n';
-const { t, locale } = useI18n();
 import { AppPopup } from '@/components/Popup';
 import FormInput from '../components/Input/FormInput';
 import WithdrawalFooter from '../components/Foter/WithdrawalFooter.vue';
@@ -11,11 +10,11 @@ import { usePopup } from '@/hooks/usePopup';
 import { useWithdrawalValidation } from '@/hooks/useWithdrawalValidation';
 import {useFetchCurrencies} from '@/hooks/useFetchCurrencies';
 import { formatCurrency } from '@/utils/currency';
-import { formatTokenQuantity } from '@/utils/token';
 import { useCurrencyStore } from '@/states/currency/store';
-import { fetchWithdrawalData } from '@/states/payments/fetch/fetchWithdrawalData';
+import { confirmWithdrawalData } from '@/states/payments/confirm/confirmWithdrawalData';
 import { useRouter } from 'vue-router';
 import {calcWithdrawalResult} from '@/states/payments/fetch/calcWithdrawalResult';
+const { t, locale } = useI18n();
 
 const router = useRouter();
 const { addressToGet, addressToGetError, minSumWithdraw, minSumWithdrawError } = useWithdrawalValidation();
@@ -33,7 +32,7 @@ const selectedToken = ref({
 });
 
 const balances = reactive({
-    usdtBalance: 0,
+    usdtBalance: 1000,
     usdtBalanceFiat: 0
 });
 
@@ -42,11 +41,6 @@ const result = reactive({
     psFee: 0,
     serviceFee: 0
 });
-
-const dataFromApi = {
-    usdtBalance: 1000,
-    usdtBalanceFiat: 1000
-};
 
 const dataFromApiConvert = {
     netSum: 100
@@ -74,32 +68,25 @@ watchEffect(async () => {
 });
 
 
-const submit = async() =>{
-    console.log('get emit');
-    await fetchWithdrawalData({
+const submit = () =>{
+    isLoading.value = true;
+
+    confirmWithdrawalData({
         address: addressToGet.value,
         token: selectedToken.value,
         sumWithdraw: minSumWithdraw.value
     });
 
-    router.push('/');
+    isLoading.value = false;
+
 };
 
 const popupHandler = ()=>{
     popupCurrency.value = !popupCurrency.value;
 };
 
-
-const balance = computed(
-    () => formatTokenQuantity(dataFromApi.usdtBalance)
-);
-
 const disableHandler = computed(
     () =>  minSumWithdrawError.value || addressToGetError.value
-);
-
-const fiatBalance = computed(
-    () => formatCurrency(dataFromApi.usdtBalanceFiat, locale.value, currencyStore.code)
 );
 
 const netSum = computed(
@@ -109,7 +96,6 @@ const netSum = computed(
 
 const {
     isPopupOpen: isLimitsOpened,
-    openPopup: openLimits
 } = usePopup();
 
 </script>
@@ -123,7 +109,7 @@ const {
             </template>
 
             <template #addon>
-                {{ $t('balance') }}: {{ balances.usdtBalance }}
+                {{ $t('balance') }}: $ {{ balances.usdtBalance }}
             </template>
 
             <template #input>
@@ -223,7 +209,6 @@ const {
                     >
                         <span v-if="!isLoading">{{ t('confirm') }}</span>
                     </VButton>
-
                 </div>
             </template>
         </WithdrawalFooter>
