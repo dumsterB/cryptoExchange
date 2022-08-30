@@ -64,7 +64,6 @@ watchEffect(async () => {
     result.netSum = data.netSum;
     result.psFee = data.psFee;
     result.serviceFee = data.serviceFee;
-
 });
 
 
@@ -93,7 +92,6 @@ const netSum = computed(
     () => formatCurrency(dataFromApiConvert.netSum, locale.value, currencyStore.code)
 );
 
-
 const {
     isPopupOpen: isLimitsOpened,
 } = usePopup();
@@ -101,7 +99,6 @@ const {
 </script>
 
 <template>
-    <!-- TODO: VSpin -->
     <div :class="styles.wrap">
         <FormInput :class="styles.formInput">
             <template #label>
@@ -216,7 +213,6 @@ const {
         <AppPopup v-model="isLimitsOpened">
             limits
         </AppPopup>
-
     </div>
 </template>
 

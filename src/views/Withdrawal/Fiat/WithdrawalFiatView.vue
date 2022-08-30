@@ -4,6 +4,7 @@ import { VButton, VInput} from '@/uikit';
 import { useI18n } from 'vue-i18n';
 import { AppPopup } from '@/components/Popup';
 import FormInput from '../components/Input/FormInput';
+import WithdrawalFooter from '../components/Foter/WithdrawalFooter.vue';
 import { usePopup } from '@/hooks/usePopup';
 import { useWithdrawalValidation } from '@/hooks/useWithdrawalValidation';
 import { formatCurrency } from '@/utils/currency';
@@ -170,28 +171,23 @@ const {
             </div>
         </div>
 
-        <div :class="styles.action">
-            <div :class="styles.actionLabel">
-                <!-- TODO: translate -->
-                {{ t('getSum') }}
-            </div>
-
-            <div :class="styles.actionValue">
-                {{ netSum }}
-            </div>
-
-            <div :class="styles.actionButton">
-                <VButton
-                    :class="styles.submitBtn"
-                    :loading="isLoading"
-                    :disabled="disableHandler"
-                    @click="submit"
-                >
-                    <span v-if="!isLoading">{{ t('confirm') }}</span>
-                </VButton>
-
-            </div>
-        </div>
+        <WithdrawalFooter
+            :data="{netSum:netSum}"
+            @submit="submit"
+        >
+            <template #submit>
+                <div :class="styles.actionButton">
+                    <VButton
+                        :class="styles.submitBtn"
+                        :loading="isLoading"
+                        :disabled="disableHandler"
+                        @click="submit"
+                    >
+                        <span v-if="!isLoading">{{ t('confirm') }}</span>
+                    </VButton>
+                </div>
+            </template>
+        </WithdrawalFooter>
 
         <AppPopup v-model="isLimitsOpened">
             limits
