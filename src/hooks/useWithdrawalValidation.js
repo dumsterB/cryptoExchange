@@ -1,9 +1,9 @@
-import { object, string, ref as yupRef } from 'yup';
+import { object, string, number, ref as yupRef } from 'yup';
 import { fields } from '@/utils/auth';
 import { useI18n } from 'vue-i18n';
 import { useField, useForm } from 'vee-validate';
 
-export function useWithdrawalValidation() {
+export function useWithdrawalValidation(usdtBalance) {
     const { t } = useI18n();
 
     const CARD_NUMBER_MIN_LENGTH = 16;
@@ -15,8 +15,9 @@ export function useWithdrawalValidation() {
             .min(CARD_NUMBER_MIN_LENGTH, t('errors.minLength', { count: CARD_NUMBER_MIN_LENGTH })),
         [fields.ADDRESS_TO_GET]: string()
             .required(t('requiredField')),
-        [fields.MIN_SUM_WITHDRAW]: string()
-            .required(t('requiredField')),
+        [fields.MIN_SUM_WITHDRAW]: number()
+            .typeError(t('requiredField'))
+            .lessThan(usdtBalance,t('minWithdrawSumValidation')),
         [fields.TOKEN]: string()
             .required(t('requiredField'))
     });

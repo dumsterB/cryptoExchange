@@ -16,8 +16,15 @@ import { useRouter } from 'vue-router';
 import {calcWithdrawalResult} from '@/states/payments/fetch/calcWithdrawalResult';
 const { t, locale } = useI18n();
 
+// eslint-disable-next-line no-unused-vars
 const router = useRouter();
-const { addressToGet, addressToGetError, minSumWithdraw, minSumWithdrawError } = useWithdrawalValidation();
+
+const balances = reactive({
+    usdtBalance: 1000,
+    usdtBalanceFiat: 0
+});
+
+const { addressToGet, addressToGetError, minSumWithdraw, minSumWithdrawError } = useWithdrawalValidation(balances.usdtBalance);
 const { arr } = useFetchCurrencies();
 
 const isLoading = ref(false);
@@ -31,10 +38,6 @@ const selectedToken = ref({
     value: '',
 });
 
-const balances = reactive({
-    usdtBalance: 1000,
-    usdtBalanceFiat: 0
-});
 
 const result = reactive({
     netSum: 0,
@@ -85,7 +88,7 @@ const popupHandler = ()=>{
 };
 
 const disableHandler = computed(
-    () =>  minSumWithdrawError.value || addressToGetError.value
+    () =>  minSumWithdraw.value && addressToGet.value && minSumWithdraw.value < balances.usdtBalance
 );
 
 const netSum = computed(
@@ -177,6 +180,7 @@ const {
                     v-model="minSumWithdraw"
                     :placeholder="t('minWithdrawSum')"
                     :error="minSumWithdrawError"
+                    type="number"
                 />
             </template>
         </FormInput>
@@ -201,7 +205,7 @@ const {
                     <VButton
                         :class="styles.submitBtn"
                         :loading="isLoading"
-                        :disabled="disableHandler"
+                        :disabled="!disableHandler"
                         @click="submit"
                     >
                         <span v-if="!isLoading">{{ t('confirm') }}</span>
