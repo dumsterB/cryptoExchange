@@ -1,8 +1,8 @@
-import type {Token} from "@/states/types/types";
-import {onMounted} from "vue";
+import type {Token} from '@/states/types/types';
+import {onMounted} from 'vue';
 
 export function useFetchCurrencies(){
-    const arr:Token[] = [
+    const currencies:Token[] = [
         {
             id:'1',
             name: 'Solana',
@@ -27,17 +27,17 @@ export function useFetchCurrencies(){
             decimals: 16,
             explorer: [],
         },
-    ]
+    ];
     const fetch = async () => {
         try {
-
+            console.log('data');
         } catch ({ message }) {
-            console.log(message)
+            console.log(message);
         }
     };
     onMounted(fetch);
 
-   return {
-       arr
-   }
+    return {
+        currencies
+    };
 }

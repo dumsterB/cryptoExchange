@@ -1,5 +1,5 @@
-<script setup>
-import { computed, onMounted, reactive, ref, watchEffect } from 'vue';
+<script setup lang="ts">
+import { computed, reactive, ref, watchEffect } from 'vue';
 import { VInput, VIcon, VAlert, VButton} from '@/uikit';
 import { useI18n } from 'vue-i18n';
 import { AppPopup } from '@/components/Popup';
@@ -8,34 +8,38 @@ import WithdrawalFooter from '../components/Foter/WithdrawalFooter.vue';
 import { TokenSearchPopup } from '../../../components/Token/index';
 import { usePopup } from '@/hooks/usePopup';
 import { useWithdrawalValidation } from '@/hooks/useWithdrawalValidation';
-import {useFetchCurrencies} from '@/hooks/useFetchCurrencies';
-import { formatCurrency } from '@/utils/currency';
-import { useCurrencyStore } from '@/states/currency/store';
+import {useFetchCurrencies} from '@/states/withdrawal/useFetchCurrencies';
 import { confirmWithdrawalData } from '@/states/payments/confirm/confirmWithdrawalData';
 import { useRouter } from 'vue-router';
 import {calcWithdrawalResult} from '@/states/payments/fetch/calcWithdrawalResult';
-const { t, locale } = useI18n();
+import type {Token} from '@/states/types/types';
+const { t } = useI18n();
 
 // eslint-disable-next-line no-unused-vars
 const router = useRouter();
 
 const balances = reactive({
-    usdtBalance: 1000,
+    usdtBalance: 0,
     usdtBalanceFiat: 0
 });
 
 const { addressToGet, addressToGetError, minSumWithdraw, minSumWithdrawError } = useWithdrawalValidation(balances.usdtBalance);
-const { arr } = useFetchCurrencies();
+const { currencies } = useFetchCurrencies();
 
 const isLoading = ref(false);
 const popupCurrency = ref(false);
 
-const selectedToken = ref({
-    id: '',
+const selectedToken:Token[] = ref({
+    id:'1',
     name: 'Solana',
-    description: '',
+    symbol: 'Sol',
+    type: 'coin',
+    chain: null,
+    price: 32,
     icon: 'solana',
-    value: '',
+    standard: null,
+    decimals: 16,
+    explorer: [],
 });
 
 
@@ -45,22 +49,26 @@ const result = reactive({
     serviceFee: 0
 });
 
-const dataFromApiConvert = {
-    netSum: 100
-};
+const commisions =ref([
+    {
+        label: t('commissionWhitex'),
+        value: result.serviceFee
+    },
+    {
+        label: t('commissionWithdraw'),
+        value: result.psFee
+    },
+]);
 
-const selectToken = (token)=>{
+const selectToken = (token:Token[])=>{
     selectedToken.value.name = token.name;
     selectedToken.value.id = token.id;
     selectedToken.value.icon = token.icon;
     selectedToken.value.value = token.value;
     popupCurrency.value = false;
 };
-const currencyStore = useCurrencyStore();
 
-onMounted(async () => {
-
-});
+//const currencyStore = useCurrencyStore();
 
 watchEffect(async () => {
     const data = await  calcWithdrawalResult(selectedToken.value); // TODO: передать currencyCode из currencyStore ниже
@@ -89,10 +97,6 @@ const popupHandler = ()=>{
 
 const disableHandler = computed(
     () =>  minSumWithdraw.value && addressToGet.value && minSumWithdraw.value < balances.usdtBalance
-);
-
-const netSum = computed(
-    () => formatCurrency(dataFromApiConvert.netSum, locale.value, currencyStore.code)
 );
 
 const {
@@ -140,7 +144,7 @@ const {
             :title="$t('selectToken')"
             :opened="popupCurrency"
             :selected-token="selectedToken"
-            :all-tokens="arr"
+            :all-tokens="currencies"
             @selectToken="selectToken"
         />
         <FormInput :class="styles.formInput">
@@ -186,18 +190,18 @@ const {
         </FormInput>
 
         <div :class="styles.fees">
-            <div :class="styles.fee">
-                <div :class="styles.feeLabel">{{ t('commission') }}</div>
-                <div :class="styles.feeValue">$ {{ result.serviceFee }} </div>
-            </div>
-            <div :class="styles.fee">
-                <div :class="styles.feeLabel">{{ t('commission2') }}</div>
-                <div :class="styles.feeValue">{{ result.psFee }} %</div>
+            <div
+                v-for="commision of commisions"
+                :key="commision.label"
+                :class="styles.fee"
+            >
+                <div :class="styles.feeLabel">{{ commision.label }}</div>
+                <div :class="styles.feeValue">$ {{ commision.value }} </div>
             </div>
         </div>
 
         <WithdrawalFooter
-            :data="{netSum:netSum}"
+            :sum="{netSum:netSum}"
             @submit="submit"
         >
             <template #submit>

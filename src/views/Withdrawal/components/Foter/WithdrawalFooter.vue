@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 defineProps({
     // eslint-disable-next-line vue/require-default-prop
-    data: {
+    sum: {
         type: Object,
     },
 });
@@ -18,7 +18,7 @@ defineProps({
         </div>
 
         <div :class="styles.actionValue">
-            {{ data.netSum }}
+            {{ sum.netSum }}
         </div>
 
         <slot name="submit"></slot>
