@@ -1,0 +1,90 @@
+.row {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(auto, 1fr) minmax(0px, 150px);
+    gap: 16px;
+    padding: 16px;
+    background-color: transparent;
+    user-select: text;
+    border-radius: 16px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &.disabled {
+        opacity: 0.4;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    & + .row {
+        margin-top: 16px;
+    }
+
+    @include hover {
+        &:hover {
+            background-color: var(--color-surface);
+        }
+    }
+}
+
+.col {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.title {
+    color: var(--color-typo-base);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+.description {
+    max-width: 200px;
+    color: var(--color-typo-ghost);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.balance {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.value {
+    flex-shrink: 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+@include max767 {
+    .row {
+        grid-template-columns: auto minmax(auto, 1fr) minmax(0px, 120px);
+    }
+
+    .title,
+    .description,
+    .value {
+        font-size: 16px;
+    }
+
+    .title {
+        margin-bottom: 5px;
+    }
+
+    .description {
+        max-width: 140px;
+    }
+}

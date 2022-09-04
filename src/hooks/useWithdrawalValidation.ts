@@ -3,9 +3,8 @@ import { fields } from '@/utils/auth';
 import { useI18n } from 'vue-i18n';
 import { useField, useForm } from 'vee-validate';
 
-export function useWithdrawalValidation(usdtBalance) {
+export function useWithdrawalValidation(usdtBalance:any) {
     const { t } = useI18n();
-
     const CARD_NUMBER_MIN_LENGTH = 16;
     const validationSchema = object({
         [fields.USDT_INPUT]: string()
@@ -17,7 +16,7 @@ export function useWithdrawalValidation(usdtBalance) {
             .required(t('requiredField')),
         [fields.MIN_SUM_WITHDRAW]: number()
             .typeError(t('requiredField'))
-            .lessThan(usdtBalance,t('minWithdrawSumValidation')),
+            .lessThan(usdtBalance.balance,t('minWithdrawSumValidation')),
         [fields.TOKEN]: string()
             .required(t('requiredField'))
     });
@@ -47,7 +46,7 @@ export function useWithdrawalValidation(usdtBalance) {
     const {
         value: minSumWithdraw,
         errorMessage: minSumWithdrawError
-    } = useField(fields.MIN_SUM_WITHDRAW);
+    } = useField<number>(fields.MIN_SUM_WITHDRAW);
 
     return {
         usdtInput,

@@ -1,82 +1,58 @@
 <script setup lang="ts">
-import { computed, reactive, ref, watchEffect } from 'vue';
+import {computed, reactive, ref, toRef, watchEffect} from 'vue';
 import { VInput, VIcon, VAlert, VButton} from '@/uikit';
 import { useI18n } from 'vue-i18n';
-import { AppPopup } from '@/components/Popup';
 import FormInput from '../components/Input/FormInput';
 import WithdrawalFooter from '../components/Foter/WithdrawalFooter.vue';
 import { TokenSearchPopup } from '../../../components/Token/index';
-import { usePopup } from '@/hooks/usePopup';
 import { useWithdrawalValidation } from '@/hooks/useWithdrawalValidation';
-import {useFetchCurrencies} from '@/states/withdrawal/useFetchCurrencies';
+import {useFetchCurrencies} from '@/states/withdrawal/fetch/useFetchCurrencies';
 import { confirmWithdrawalData } from '@/states/payments/confirm/confirmWithdrawalData';
-import { useRouter } from 'vue-router';
-import {calcWithdrawalResult} from '@/states/payments/fetch/calcWithdrawalResult';
+import {calcWithdrawalToken} from '@/states/withdrawal/hooks/calcWithdrawalToken';
 import type {Token} from '@/states/types/types';
+import { useUserBalance } from '@/states/withdrawal/fetch/useUserBalance';
 const { t } = useI18n();
 
-// eslint-disable-next-line no-unused-vars
-const router = useRouter();
+const usdtBalance = useUserBalance();
 
-const balances = reactive({
-    usdtBalance: 0,
-    usdtBalanceFiat: 0
-});
-
-const { addressToGet, addressToGetError, minSumWithdraw, minSumWithdrawError } = useWithdrawalValidation(balances.usdtBalance);
+const { addressToGet, addressToGetError, minSumWithdraw, minSumWithdrawError } = useWithdrawalValidation(usdtBalance);
 const { currencies } = useFetchCurrencies();
-
 const isLoading = ref(false);
 const popupCurrency = ref(false);
 
-const selectedToken:Token[] = ref({
-    id:'1',
-    name: 'Solana',
-    symbol: 'Sol',
-    type: 'coin',
-    chain: null,
-    price: 32,
-    icon: 'solana',
-    standard: null,
-    decimals: 16,
-    explorer: [],
-});
+let selectedToken = ref<Token>(currencies[0]);
 
+
+const selectCurrency = (token:Token) =>{
+    selectedToken.value = token;
+};
 
 const result = reactive({
     netSum: 0,
-    psFee: 0,
-    serviceFee: 0
+    feeAgent: 0,
+    feeWhitex: 0
 });
 
-const commisions =ref([
+watchEffect(async () => {
+    const data = await  calcWithdrawalToken(selectedToken.value, minSumWithdraw.value);
+    result.netSum = data.netSum;
+    result.feeAgent = data.feeAgent;
+    result.feeWhitex = data.feeWhitex;
+});
+
+const feeAgent = toRef(result,'feeAgent');
+const feeWhitex = toRef(result,'feeWhitex');
+
+const fees = reactive([
     {
         label: t('commissionWhitex'),
-        value: result.serviceFee
+        value: feeWhitex
     },
     {
         label: t('commissionWithdraw'),
-        value: result.psFee
+        value: feeAgent
     },
 ]);
-
-const selectToken = (token:Token[])=>{
-    selectedToken.value.name = token.name;
-    selectedToken.value.id = token.id;
-    selectedToken.value.icon = token.icon;
-    selectedToken.value.value = token.value;
-    popupCurrency.value = false;
-};
-
-//const currencyStore = useCurrencyStore();
-
-watchEffect(async () => {
-    const data = await  calcWithdrawalResult(selectedToken.value); // TODO: передать currencyCode из currencyStore ниже
-    result.netSum = data.netSum;
-    result.psFee = data.psFee;
-    result.serviceFee = data.serviceFee;
-});
-
 
 const submit = () =>{
     isLoading.value = true;
@@ -96,12 +72,8 @@ const popupHandler = ()=>{
 };
 
 const disableHandler = computed(
-    () =>  minSumWithdraw.value && addressToGet.value && minSumWithdraw.value < balances.usdtBalance
+    () =>  minSumWithdraw.value && addressToGet.value && minSumWithdraw.value < usdtBalance.balance
 );
-
-const {
-    isPopupOpen: isLimitsOpened,
-} = usePopup();
 
 </script>
 
@@ -113,7 +85,7 @@ const {
             </template>
 
             <template #addon>
-                {{ $t('balance') }}: $ {{ balances.usdtBalance }}
+                {{ $t('balance') }}: $ {{ usdtBalance.balance }}
             </template>
 
             <template #input>
@@ -139,13 +111,11 @@ const {
             </template>
         </FormInput>
         <TokenSearchPopup
-            v-if="popupCurrency"
-            v-model="popupCurrency"
-            :title="$t('selectToken')"
-            :opened="popupCurrency"
-            :selected-token="selectedToken"
-            :all-tokens="currencies"
-            @selectToken="selectToken"
+            v-model:opened="popupCurrency"
+            :title="t('selectToken')"
+            :selected-currency="selectedToken"
+            :currencies="currencies"
+            @select-currency="selectCurrency"
         />
         <FormInput :class="styles.formInput">
             <template #label>
@@ -188,22 +158,29 @@ const {
                 />
             </template>
         </FormInput>
-
         <div :class="styles.fees">
             <div
-                v-for="commision of commisions"
-                :key="commision.label"
+                v-for="fee of fees"
+                :key="fee.label"
                 :class="styles.fee"
             >
-                <div :class="styles.feeLabel">{{ commision.label }}</div>
-                <div :class="styles.feeValue">$ {{ commision.value }} </div>
+                <div :class="styles.feeLabel">{{ fee.label }}</div>
+                <div :class="styles.feeValue">$ {{ fee.value }} </div>
             </div>
         </div>
 
         <WithdrawalFooter
-            :sum="{netSum:netSum}"
             @submit="submit"
         >
+            <template #fees>
+                <div :class="styles.actionLabel">
+                    {{ t('getSum') }}
+                </div>
+
+                <div :class="styles.actionValue">
+                    {{ result.netSum }}
+                </div>
+            </template>
             <template #submit>
                 <div :class="styles.actionButton">
                     <VButton
@@ -212,20 +189,14 @@ const {
                         :disabled="!disableHandler"
                         @click="submit"
                     >
-                        <span v-if="!isLoading">{{ t('confirm') }}</span>
+                        <span>{{ t('confirm') }}</span>
                     </VButton>
                 </div>
             </template>
         </WithdrawalFooter>
-
-        <AppPopup v-model="isLimitsOpened">
-            limits
-        </AppPopup>
     </div>
 </template>
 
 <style lang="scss" scoped module="styles">
 @import './WithdrawalTokenView.scss';
-
-
 </style>
