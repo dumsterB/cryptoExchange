@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, reactive, ref, toRef, watchEffect} from 'vue';
+import {computed, reactive, ref, watchEffect} from 'vue';
 import { VInput, VIcon, VAlert, VButton} from '@/uikit';
 import { useI18n } from 'vue-i18n';
 import FormInput from '../components/Input/FormInput';
@@ -22,7 +22,6 @@ const popupCurrency = ref(false);
 
 let selectedToken = ref<Token>(currencies[0]);
 
-
 const selectCurrency = (token:Token) =>{
     selectedToken.value = token;
 };
@@ -40,19 +39,18 @@ watchEffect(async () => {
     result.feeWhitex = data.feeWhitex;
 });
 
-const feeAgent = toRef(result,'feeAgent');
-const feeWhitex = toRef(result,'feeWhitex');
-
-const fees = reactive([
-    {
-        label: t('commissionWhitex'),
-        value: feeWhitex
-    },
-    {
-        label: t('commissionWithdraw'),
-        value: feeAgent
-    },
-]);
+const fees = computed(() => {
+    return [
+        {
+            label: t('commissionWhitex'),
+            value: result.feeAgent
+        },
+        {
+            label: t('commissionWithdraw'),
+            value: result.feeWhitex
+        }
+    ];
+});
 
 const submit = () =>{
     isLoading.value = true;
