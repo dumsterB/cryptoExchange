@@ -106,6 +106,7 @@ export default {
     numberCard: 'Номер карты',
     commissionWhitex: 'Комиссия Whitex',
     commissionWithdraw: 'Комиссия посредника',
+    commissionNetwork:'Коммисия сети',
     getSum: 'Сумма к получению',
     confirm: 'Подтвердить',
     sumChecker: 'Сумма превышает ваш баланс',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, reactive, ref, watchEffect} from 'vue';
+import {computed, ref} from 'vue';
 import { VInput, VIcon, VAlert, VButton} from '@/uikit';
 import { useI18n } from 'vue-i18n';
 import FormInput from '../components/Input/FormInput';
@@ -7,17 +7,16 @@ import WithdrawalFooter from '../components/Foter/WithdrawalFooter.vue';
 import { TokenSearchPopup } from '../../../components/Token/index';
 import { useWithdrawalValidation } from '@/hooks/useWithdrawalValidation';
 import {useFetchCurrencies} from '@/states/withdrawal/fetch/useFetchCurrencies';
-import { confirmWithdrawalData } from '@/states/payments/confirm/confirmWithdrawalData';
-import {calcWithdrawalToken} from '@/states/withdrawal/hooks/calcWithdrawalToken';
 import type {Token} from '@/states/types/types';
 import { useUserBalance } from '@/states/withdrawal/fetch/useUserBalance';
+import {useTokenWithdrawal} from '@/states/withdrawal/fetch/useTokenWithdrawal';
+import {useWithdrawalOutput} from '@/states/withdrawal/fetch/useWithdrawalOutput';
 const { t } = useI18n();
 
 const usdtBalance = useUserBalance();
 
 const { addressToGet, addressToGetError, minSumWithdraw, minSumWithdrawError } = useWithdrawalValidation(usdtBalance);
 const { currencies } = useFetchCurrencies();
-const isLoading = ref(false);
 const popupCurrency = ref(false);
 
 let selectedToken = ref<Token>(currencies[0]);
@@ -26,44 +25,15 @@ const selectCurrency = (token:Token) =>{
     selectedToken.value = token;
 };
 
-const result = reactive({
+const result = {
     netSum: 0,
-    feeAgent: 0,
-    feeWhitex: 0
-});
-
-watchEffect(async () => {
-    const data = await  calcWithdrawalToken(selectedToken.value, minSumWithdraw.value);
-    result.netSum = data.netSum;
-    result.feeAgent = data.feeAgent;
-    result.feeWhitex = data.feeWhitex;
-});
-
-const fees = computed(() => {
-    return [
-        {
-            label: t('commissionWhitex'),
-            value: result.feeAgent
-        },
-        {
-            label: t('commissionWithdraw'),
-            value: result.feeWhitex
-        }
-    ];
-});
-
-const submit = () =>{
-    isLoading.value = true;
-
-    confirmWithdrawalData({
-        address: addressToGet.value,
-        token: selectedToken.value,
-        sumWithdraw: minSumWithdraw.value
-    });
-
-    isLoading.value = false;
-
+    feeNetwork: 5,
+    feeWhitex: '$ 10',
 };
+
+const { outputAmount, fees } = useWithdrawalOutput(selectedToken, minSumWithdraw, result);
+
+const {confirmTokenWithdrawal,isLoading: isConfirmLoading} = useTokenWithdrawal(addressToGet, minSumWithdraw, selectedToken);
 
 const popupHandler = ()=>{
     popupCurrency.value = !popupCurrency.value;
@@ -163,7 +133,7 @@ const disableHandler = computed(
                 :class="styles.fee"
             >
                 <div :class="styles.feeLabel">{{ fee.label }}</div>
-                <div :class="styles.feeValue">$ {{ fee.value }} </div>
+                <div :class="styles.feeValue">{{ fee.value }} </div>
             </div>
         </div>
 
@@ -176,16 +146,16 @@ const disableHandler = computed(
                 </div>
 
                 <div :class="styles.actionValue">
-                    {{ result.netSum }}
+                    {{ outputAmount }}
                 </div>
             </template>
             <template #submit>
                 <div :class="styles.actionButton">
                     <VButton
                         :class="styles.submitBtn"
-                        :loading="isLoading"
+                        :loading="isConfirmLoading"
                         :disabled="!disableHandler"
-                        @click="submit"
+                        @click="confirmTokenWithdrawal"
                     >
                         <span>{{ t('confirm') }}</span>
                     </VButton>

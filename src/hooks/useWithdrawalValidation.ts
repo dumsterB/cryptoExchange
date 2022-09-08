@@ -36,7 +36,7 @@ export function useWithdrawalValidation(usdtBalance:any) {
     const {
         value: addressToGet,
         errorMessage: addressToGetError
-    } = useField(fields.ADDRESS_TO_GET);
+    } = useField<string>(fields.ADDRESS_TO_GET);
 
     const {
         value: token,
